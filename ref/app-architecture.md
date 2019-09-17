@@ -23,6 +23,7 @@ Entities/ - (directory/Namespace)
 Utilities/ - (directory/Namespace)
     DB.php
         Class for object that creates connection to Cat database
+        Wrapper object that contains desired database details
 Hydrators/ - (directory/Namespace)
     CatHydrator.php
         static function makeListOfCats($db)
