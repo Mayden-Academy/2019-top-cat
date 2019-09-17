@@ -1,5 +1,15 @@
 <?php
 
+function drawCats(array $cats) :string {
+    $stringyCats = '';
+    foreach($cats as $cat) {
+        $stringyCats .= '<div class="cat-image"><img src="' . $cat->image . '" alt="A cat"></div>';
+    }
+    return $stringyCats;
+}
+
+$catshtml = drawCats($cats);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,10 +38,9 @@
     </div>
     <div class="container">
       <div class="cat-pictures">
-        <?php ?>
-        <!-- <div class="cat-image">
-          <img src="cat-pic-placeholder.jpg" alt="" srcset="">
-        </div> -->
+        <?php
+            echo $catshtml;
+        ?>
       </div>
     </div>
     <div class="footer">
