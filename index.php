@@ -1,14 +1,14 @@
 <?php
 
-function drawCats(array $cats) :string {
-    $stringyCats = '';
-    foreach($cats as $cat) {
-        $stringyCats .= '<div class="cat-image"><img src="' . $cat->image . '" alt="A cat"></div>';
-    }
-    return $stringyCats;
-}
-
-$catshtml = drawCats($cats);
+//function drawCats(array $cats) :string {
+//    $stringyCats = '';
+//    foreach($cats as $cat) {
+//        $stringyCats .= '<div class="cat-image"><img src="' . $cat->image . '" alt="A cat"></div>';
+//    }
+//    return $stringyCats;
+//}
+//
+//$catshtml = drawCats($cats);
 
 if (isset($_GET['breed'])) {
     //get array of cats from cat hydrator
@@ -31,15 +31,14 @@ if (isset($_GET['breed'])) {
         <h1>Top Cat</h1>
         <form action="index.php" method="get">
           <div class="form-group">
-            <label>Select your breed:</label>
             <div class="selector">
               <select name="breed" id="select-breed">
-                <option value="0">Please select:</option>
+                <option value="0">Please select your breed</option>
                 <?php ?>
               </select>
             </div>
           </div>
-            <input type="submit">
+            <input class="sub-btn" type="submit" value="Show me the cats!">
         </form>
       </div>
     </div>
