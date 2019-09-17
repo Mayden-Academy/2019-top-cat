@@ -43,12 +43,18 @@ class DB
 
     // Get img src from the Cat API
     public function getCatImg() {
-        $breedId = '';
-        $apiUrlForImg = 'https://api.thecatapi.com/v1/images/search?breed_ids=' . $breedId . '&limit=9';
+        $breedId = $this->getCatBreed();
+        $catImgUrl = [];
+        echo "<br>";
+        echo "<br>";
+        foreach($breedId as $id) {
+            $catImgApiUrl = 'https://api.thecatapi.com/v1/images/search?breed_ids=' . $id . '&limit=9';
+            array_push($catImgUrl, $catImgApiUrl);
+        }
+        return $catImgUrl;
     }
-
 }
 
 $test = new DB();
-$result = $test->getCatBreed();
+$result = $test->getCatImg();
 var_dump($result);
