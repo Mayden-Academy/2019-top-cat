@@ -23,16 +23,15 @@
               </select>
             </div>
           </div>
-        </div>
-      </form>
+        </form>
       </div>
-      <div class="container">
-        <div class="cat-pictures">
-          <?php ?>
-          <!-- <div class="cat-image">
-            <img src="cat-pic-placeholder.jpg" alt="" srcset="">
-          </div> -->
-        </div>
+    </div>
+    <div class="container">
+      <div class="cat-pictures">
+        <?php ?>
+        <!-- <div class="cat-image">
+          <img src="cat-pic-placeholder.jpg" alt="" srcset="">
+        </div> -->
       </div>
     </div>
     <div class="footer">
