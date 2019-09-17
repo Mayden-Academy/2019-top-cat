@@ -47,7 +47,8 @@ class DB
             array_push($breedArray, $responseArray[$i]["id"]);
             array_push($breedNameArray, $responseArray[$i]["name"]);
         }
-        return [$breedArray, $breedNameArray];
+        $associativeBreedArray = array_combine($breedArray, $breedNameArray);
+        return $associativeBreedArray;
     }
 
     public function fillCatBreedToDB()
@@ -97,5 +98,5 @@ class DB
 }
 
 $test = new DB();
-$result = $test->fillCatBreedToDB();
+$result = $test->getCatBreed();
 var_dump($result);
