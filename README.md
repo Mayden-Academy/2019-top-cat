@@ -4,7 +4,7 @@ TheCatApi // Developer Experience
 https://docs.thecatapi.com/
 
 
-##Authentication
+## Authentication
 
 **Request Header**
 * The best & most secure way to send it
