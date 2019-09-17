@@ -13,6 +13,7 @@
     <div class="container">
       <h1>Top Cat</h1>
       <form action="post">
+        <label>Select your breed:</label>
         <select name="breed" id="select-breed">
           <option value="">Please select:</option>
           <?php ?>
