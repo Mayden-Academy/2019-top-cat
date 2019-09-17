@@ -10,6 +10,12 @@ function drawCats(array $cats) :string {
 
 $catshtml = drawCats($cats);
 
+if (isset($_GET['breed'])) {
+    //get array of cats from cat hydrator
+    // draw cats
+}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +29,7 @@ $catshtml = drawCats($cats);
     <div class="header">
       <div class="container">
         <h1>Top Cat</h1>
-        <form action="get">
+        <form action="index.php" method="get">
           <div class="form-group">
             <label>Select your breed:</label>
             <div class="selector">
@@ -33,6 +39,7 @@ $catshtml = drawCats($cats);
               </select>
             </div>
           </div>
+            <input type="submit">
         </form>
       </div>
     </div>
