@@ -30,7 +30,7 @@ class DB
         ));
 
         $response = curl_exec($curl);
-        $err = curl_error($curl);
+        $error = curl_error($curl);
         curl_close($curl);
 
         $responseArray = json_decode($response, true);
@@ -46,13 +46,14 @@ class DB
     {
         $breedId = $this->getCatBreed();
         $catImgUrl = [];
-        echo "<br>";
-        echo "<br>";
         foreach ($breedId as $id) {
-            $catImgApiUrl = 'https://api.thecatapi.com/v1/images/search?breed_ids=' . $id . '&limit=9';
+            $catImgApiUrl = 'https://api.thecatapi.com/v1/images/search?breed_ids=' . $id . '&limit=21';
             array_push($catImgUrl, $catImgApiUrl);
         }
-
+        var_dump($catImgUrl);
+        echo "<br>";
+        echo "<br>";
+        $imgSrcArray = [];
         foreach ($catImgUrl as $apiUrl) {
             $curl = curl_init();
             curl_setopt_array($curl, array(
@@ -64,20 +65,23 @@ class DB
                 ),
             ));
 
-            $ImgApiresponse = curl_exec($curl);
-            $err = curl_error($curl);
+            $imgApiResponse = curl_exec($curl);
+            $error = curl_error($curl);
             curl_close($curl);
 
-            $responseArray = json_decode($ImgApiresponse, true);
-            $imgSrcArray = [];
-            for ($i = 0; $i < count($responseArray); $i++) {
-                array_push($imgSrcArray, $responseArray[$i]["id"]);
+            $responseArray = json_decode($imgApiResponse, true);
+
+            foreach($responseArray as $item) {
+                array_push($imgSrcArray, $item["url"]);
             }
+//            for ($i = 0; $i < count($responseArray); $i++) {
+//                array_push($imgSrcArray, $responseArray[$i]["url"]);
+//            }
         }
+        var_dump($imgSrcArray);
         return $imgSrcArray;
     }
 }
 
 $test = new DB();
 $result = $test->getCatImg();
-var_dump($result);
