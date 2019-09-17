@@ -1,11 +1,13 @@
 # App Architecture
 
+The Top Cat App will use an Entity/Hydrator design pattern to pull data from a datbase and create an array of objects of the same class
+
 #### Index.php
 - Instantiate DB connection object
 - Pulls breed list (as array of strings) from DB using DB connection object
 - If breed selection given:
-- Give CatHydrator the DB connection object and return the list of CatEntity objects
-    - Add main HTML for Top Cat page
+    - Give CatHydrator the DB connection object and return the list of CatEntity objects
+- Add main HTML for Top Cat page
 - Translate breed list to HTML inline
 - Translate Cats to HTML inline
 
@@ -28,8 +30,8 @@
 
 ## Utilities/ - (directory/Namespace)
 #### DB.php
-- Class for object that creates connection to Cat database
-- Wrapper object that contains desired database details
+- Wrapper class that creates connection to Cat database
+- Contains database connection details
 
 ## Hydrators/ - (directory/Namespace)
 #### CatHydrator.php
