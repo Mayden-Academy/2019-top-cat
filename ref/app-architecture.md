@@ -1,6 +1,6 @@
 # App Architecture
 
-The Top Cat App will use an Entity/Hydrator design pattern to pull data from a datbase and create an array of objects of the same class
+The Top Cat App will use an Entity/Hydrator design pattern to pull data from a database and create an array of CatEntity objects
 
 #### Index.php
 - Instantiate DB connection object
