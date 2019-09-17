@@ -1,6 +1,19 @@
 <?php
+require_once 'utilities/DB.php';
 
-$dbConnection = new DB('mysql:host=192.168.20.20, dbname=', 'CatDB', 'root', '');
+$dbConnection = new DB();
+
+$db = $dbConnection->getPDO();
+
+$breeds = [];
+
+$breedSql = $db->prepare('SELECT `breed` FROM `breed`');
+
+$breedSql->execute();
+
+$breeds = $breedSql->fetchAll();
+
+var_dump($breeds);
 
 function drawCats(array $cats) :string {
     $stringyCats = '';
@@ -17,7 +30,7 @@ $catshtml = drawCats($cats);
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-git finitowidth, initial-scale=1">
     <title>Top Cat</title>
     <link rel="stylesheet" href="style.css">
   </head>
