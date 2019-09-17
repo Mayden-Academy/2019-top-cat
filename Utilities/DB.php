@@ -54,8 +54,8 @@ class DB
     public function fillCatBreedToDB()
     {
         $dbconnect = $this->dbConnect();
-        $catBreedName = $this->getCatBreed()[1];
-        foreach($catBreedName as $breed) {
+        $catBreeds = $this->getCatBreed();
+        foreach($catBreeds as $id=>$breed) {
             $sql = $dbconnect->prepare('INSERT INTO `breed` (breed) VALUES (\'' . $breed . '\');');
             $sql->execute();
         }
@@ -64,18 +64,13 @@ class DB
     // Get img src from the Cat API
     public function getCatImg()
     {
-        $breedId = $this->getCatBreed()[0];
-        $catImgUrl = [];
-        foreach ($breedId as $id) {
-            $catImgApiUrl = 'https://api.thecatapi.com/v1/images/search?breed_ids=' . $id . '&limit=21';
-            array_push($catImgUrl, $catImgApiUrl);
-        }
-
+        $catBreeds = $this->getCatBreed();
         $imgSrcArray = [];
-        foreach ($catImgUrl as $apiUrl) {
+        foreach ($catBreeds as $id=>$name) {
+            $catImgApiUrl = 'https://api.thecatapi.com/v1/images/search?breed_ids=' . $id . '&limit=21';
             $curl = curl_init();
             curl_setopt_array($curl, array(
-                CURLOPT_URL => $apiUrl,
+                CURLOPT_URL => $catImgApiUrl,
                 CURLOPT_CUSTOMREQUEST => "GET",
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_HTTPHEADER => array(
@@ -88,15 +83,20 @@ class DB
             curl_close($curl);
 
             $responseArray = json_decode($imgApiResponse, true);
+            $breedImgs = [];
 
             foreach($responseArray as $item) {
-                array_push($imgSrcArray, $item["url"]);
+                array_push($breedImgs, $item["url"]);
             }
+            //array_push($imgSrcArray, $breedImgs);   //Swap array_push for method that gives key of breed name
+            $imgSrcArray[$name] = $breedImgs;
         }
+        var_dump($imgSrcArray);
         return $imgSrcArray;
     }
+
 }
 
 $test = new DB();
-$result = $test->getCatBreed();
-var_dump($result);
+$result = $test->getCatImg();
+
