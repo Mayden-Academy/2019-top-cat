@@ -1,10 +1,8 @@
 <?php
 
-
 $servername = "localhost";
 $username = "root";
 $password = "";
-
 
 try {
     $conn = new PDO("mysql:host=192.168.20.20", $username, $password);
