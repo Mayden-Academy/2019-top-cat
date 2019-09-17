@@ -16,10 +16,12 @@
         <form action="post">
           <div class="form-group">
             <label>Select your breed:</label>
-            <select name="breed" id="select-breed">
-              <option value="">Please select:</option>
-              <?php ?>
-            </select>
+            <div class="selector">
+              <select name="breed" id="select-breed">
+                <option value="0">Please select:</option>
+                <?php ?>
+              </select>
+            </div>
           </div>
         </div>
       </form>
