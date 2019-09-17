@@ -29,18 +29,9 @@
       <div class="container">
         <div class="cat-pictures">
           <?php ?>
-          <div class="cat-image">
+          <!-- <div class="cat-image">
             <img src="cat-pic-placeholder.jpg" alt="" srcset="">
-          </div>
-          <div class="cat-image">
-            <img src="cat-pic-placeholder.jpg" alt="" srcset="">
-          </div>
-          <div class="cat-image">
-            <img src="cat-pic-placeholder.jpg" alt="" srcset="">
-          </div>
-          <div class="cat-image">
-            <img src="cat-pic-placeholder.jpg" alt="" srcset="">
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
