@@ -13,17 +13,17 @@ $breedSql->execute();
 
 $breeds = $breedSql->fetchAll();
 
-var_dump($breeds);
+//function drawCats(array $cats) :string {
+//    $stringyCats = '';
+//    foreach($cats as $cat) {
+//        $stringyCats .= '<div class="cat-image"><img src="' . $cat->image . '" alt="A cat"></div>';
+//    }
+//    return $stringyCats;
+//}
+//
+//$catshtml = drawCats($cats);
 
-function drawCats(array $cats) :string {
-    $stringyCats = '';
-    foreach($cats as $cat) {
-        $stringyCats .= '<div class="cat-image"><img src="' . $cat->image . '" alt="A cat"></div>';
-    }
-    return $stringyCats;
-}
-
-$catshtml = drawCats($cats);
+var_dump($breeds[0]);
 
 ?>
 <!DOCTYPE html>
@@ -44,7 +44,14 @@ $catshtml = drawCats($cats);
             <div class="selector">
               <select name="breed" id="select-breed">
                 <option value="0">Please select:</option>
-                <?php ?>
+                <?php
+
+                for($i = 0; $i < count($breeds); $i++) {
+                    $breed = $breeds[$i]['breed'];
+                    echo "<option>$breed</option>";
+                }
+
+                ?>
               </select>
             </div>
           </div>
@@ -54,7 +61,7 @@ $catshtml = drawCats($cats);
     <div class="container">
       <div class="cat-pictures">
         <?php
-            echo $catshtml;
+//            echo $catshtml;
         ?>
       </div>
     </div>
