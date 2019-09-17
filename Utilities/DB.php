@@ -3,20 +3,27 @@
 
 class DB
 {
-    private $serverdb = 'mysql:host=192.168.20.20; db=name=';
-    private $dbname = '';
+    private $serverdb = 'mysql:host=192.168.20.20; dbname=cat-test';
     private $username = 'root';
     private $password = '';
 
     // Create connection
-    public function dbConnect($serverdb, $dbname, $username, $password)
+
+    /**
+     * @return PDO
+     */
+    public function dbConnect()
     {
-        $dbconnect = new PDO($serverdb . $dbname, $username, $password);
+        $dbconnect = new PDO($this->serverdb, $this->username, $this->password);
         $dbconnect->setAttribute(
             PDO::ATTR_DEFAULT_FETCH_MODE,
             PDO::FETCH_ASSOC);
+        return $dbconnect;
     }
 
+    /**
+     * @return array
+     */
     public function getCatBreed()
     {
         $curl = curl_init();
@@ -35,24 +42,34 @@ class DB
 
         $responseArray = json_decode($response, true);
         $breedArray = [];
+        $breedNameArray = [];
         for ($i = 0; $i < count($responseArray); $i++) {
             array_push($breedArray, $responseArray[$i]["id"]);
+            array_push($breedNameArray, $responseArray[$i]["name"]);
         }
-        return $breedArray;
+        return [$breedArray, $breedNameArray];
+    }
+
+    public function fillCatBreedToDB()
+    {
+        $dbconnect = $this->dbConnect();
+        $catBreedName = $this->getCatBreed()[1];
+        foreach($catBreedName as $breed) {
+            $sql = $dbconnect->prepare('INSERT INTO `breed` (breed) VALUES (\'' . $breed . '\');');
+            $sql->execute();
+        }
     }
 
     // Get img src from the Cat API
     public function getCatImg()
     {
-        $breedId = $this->getCatBreed();
+        $breedId = $this->getCatBreed()[0];
         $catImgUrl = [];
         foreach ($breedId as $id) {
             $catImgApiUrl = 'https://api.thecatapi.com/v1/images/search?breed_ids=' . $id . '&limit=21';
             array_push($catImgUrl, $catImgApiUrl);
         }
-        var_dump($catImgUrl);
-        echo "<br>";
-        echo "<br>";
+
         $imgSrcArray = [];
         foreach ($catImgUrl as $apiUrl) {
             $curl = curl_init();
@@ -74,14 +91,11 @@ class DB
             foreach($responseArray as $item) {
                 array_push($imgSrcArray, $item["url"]);
             }
-//            for ($i = 0; $i < count($responseArray); $i++) {
-//                array_push($imgSrcArray, $responseArray[$i]["url"]);
-//            }
         }
-        var_dump($imgSrcArray);
         return $imgSrcArray;
     }
 }
 
 $test = new DB();
-$result = $test->getCatImg();
+$result = $test->fillCatBreedToDB();
+var_dump($result);
