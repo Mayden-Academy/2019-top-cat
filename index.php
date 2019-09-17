@@ -13,7 +13,7 @@
     <div class="header">
       <div class="container">
         <h1>Top Cat</h1>
-        <form action="post">
+        <form action="get">
           <div class="form-group">
             <label>Select your breed:</label>
             <div class="selector">
