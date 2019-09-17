@@ -1,5 +1,7 @@
 <?php
 
+$dbConnection = new DB('mysql:host=192.168.20.20, dbname=', 'CatDB', 'root', '');
+
 function drawCats(array $cats) :string {
     $stringyCats = '';
     foreach($cats as $cat) {
