@@ -7,3 +7,10 @@ $password = '';
 
 // Create connection
 $dbconnect = new PDO($serverdb . $dbname, $username, $password);
+
+
+$dbconnect->setAttribute(
+    PDO::ATTR_DEFAULT_FETCH_MODE,
+    PDO::FETCH_ASSOC);
+
+$imgSrcToFill =
