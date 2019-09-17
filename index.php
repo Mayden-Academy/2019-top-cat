@@ -10,7 +10,17 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    
-    
+    <div class="container">
+      <h1>Top Cat</h1>
+      <form action="post">
+        <select name="breed" id="select-breed">
+          <option value="">Please select:</option>
+          <?php ?>
+        </select>
+    </form>
+    <div class="cat-pictures">
+      <?php ?>
+    </div>
+  </div>
   </body>
 </html>
