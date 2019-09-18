@@ -19,14 +19,14 @@
     
     
 ##### DB class 
-*Utilities/DB.php*
+###### *Utilities/DB.php*
 
 * DB class contains a PDO that connects to the database
 
 
 
 ##### SQL to generate DB 
-*ref/cat-test_2019-09-16-database-design.sql*
+###### *ref/cat-test_2019-09-16-database-design.sql*
 
 * Contains query to generate cat database for the app.
 * The database contains two tables - breed, img
