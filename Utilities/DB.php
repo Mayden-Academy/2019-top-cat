@@ -113,7 +113,7 @@ class DB
      * Get the return value from getCatImg() method
      * Get the return value of getCatBreed() method, turn it into an indexed array
      * Create a new array $sqlArray which is the array of strings consist of 'img url($url)' and 'breed id($breedID)' that will be pushed to database directly as is
-     * @return voide
+     * @return void
      */
     public function fillCatImg()
     {
