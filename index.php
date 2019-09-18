@@ -17,7 +17,7 @@ $breeds = $breedSql->fetchAll();
  * @return string
  */
 
-function populateDropdown($breeds)
+function populateDropdown(array $breeds): string
 {
     $stringyBreeds = '';
 
