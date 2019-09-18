@@ -9,6 +9,14 @@ $breedSql = $db->prepare('SELECT `breed` FROM `breed`');
 $breedSql->execute();
 $breeds = $breedSql->fetchAll();
 
+/***
+ * Iterates through all breeds and populates
+ * the dropdown options
+ *
+ * @param $breeds
+ * @return string
+ */
+
 function populateDropdown($breeds)
 {
     $stringyBreeds = '';
