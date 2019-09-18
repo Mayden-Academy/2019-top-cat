@@ -64,7 +64,7 @@ class DB
     {
         $dbconnect = $this->dbConnect();
         $catBreeds = $this->getCatBreed();
-        foreach($catBreeds as $id=>$breed) {
+        foreach($catBreeds as $id => $breed) {
             $sql = $dbconnect->prepare('INSERT INTO `breed` (breed) VALUES (\'' . $breed . '\');');
             $sql->execute();
         }
@@ -81,7 +81,7 @@ class DB
     {
         $catBreeds = $this->getCatBreed();
         $imgSrcArray = [];
-        foreach ($catBreeds as $id=>$name) {
+        foreach ($catBreeds as $id => $name) {
             $catImgApiUrl = 'https://api.thecatapi.com/v1/images/search?breed_ids=' . $id . '&limit=21';
             $curl = curl_init();
             curl_setopt_array($curl, array(
