@@ -10,7 +10,7 @@
 * To run it, in the command line type 
 **You must be inside the APIScrape directory**
 
-    ``` php scrape.php ```
+    ```$ php scrape.php ```
     
     
     
