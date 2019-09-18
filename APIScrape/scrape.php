@@ -9,7 +9,7 @@ $dbconnection = $db->dbConnect();
  * Creates a new database into which to put the scraped data.
  * If the database already exists, tears it down and creates a new one.
  */
-function createDatabase(PDO $dbconnection) {
+function createDatabase(PDO $db) {
     try {
         //$conn = new PDO("mysql:host=192.168.20.20", $username, $password);
         //$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -32,7 +32,7 @@ function createDatabase(PDO $dbconnection) {
                 UNIQUE KEY `img_src` (`img_src`)
                 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
     
-        $dbconnection->exec($sql);
+        $db->exec($sql);
         echo "Database successfully initialised.";
     } catch (PDOException $e) {
         echo $e->getMessage();
