@@ -13,12 +13,10 @@
     ```$ php scrape.php ```
     
     
-    
 ## DB class
 ### *Utilities/DB.php*
 
 * DB class contains a PDO that connects to the database
-
 
 
 ## SQL to generate DB
