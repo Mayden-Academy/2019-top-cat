@@ -18,16 +18,12 @@
     ``` php scrape.php ```
 <br />
 <br />
-<br />
-<br />
 
 #### DB class
 
 ###### *Utilities/DB.php*
 
 * DB class contains a PDO that connects to the database
-<br />
-<br />
 <br />
 <br />
 
