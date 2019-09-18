@@ -23,11 +23,10 @@
 ###### *Utilities/DB.php*
 
 * DB class contains a PDO that connects to the database
-
-
-
-
-
+<br />
+<br />
+<br />
+<br />
 #### SQL to generate DB 
 ###### *ref/cat-test_2019-09-16-database-design.sql*
 
