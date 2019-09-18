@@ -46,7 +46,7 @@ function createDatabase(PDO $dbconnection) {
  * Return an associative array of breed id as $key and breed name as $ value
  * @return array
  */
-function getCatBreed():array
+function getCatBreeds():array
 {
     $curl = curl_init();
     curl_setopt_array($curl, array(
@@ -153,7 +153,7 @@ function fillCatImg($catBreedArray, $catImgSrcArray)
 createDatabase($dbconnection);
 
 
-$breeds = getCatBreed();
+$breeds = getCatBreeds();
 $DBobject->fillCatBreedToDB($breeds);
 $catImgSrcArray = $DBobject->getCatImg($breeds);
 $DBobject->fillCatImg($breeds, $catImgSrcArray);
