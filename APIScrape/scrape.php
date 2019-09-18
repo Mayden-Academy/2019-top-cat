@@ -151,7 +151,7 @@ function fillCatImages(PDO $db, array $catBreedArray, array $catImageSourceArray
         }
     }
     $sqlString = implode(',', $sqlArray);
-    $sql = $db->prepare('USE `cat-test`; INSERT INTO `img` (img_src, breed_id) VALUES ' . $sqlString . ';');
+    $sql = $db->prepare('INSERT INTO `img` (img_src, breed_id) VALUES ' . $sqlString . ';');
     $sql->execute();
     echo "\033[2KAll cat image URLs added to database.\n";
 }
