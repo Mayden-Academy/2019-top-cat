@@ -131,5 +131,5 @@ class DB
 $DBobject = new DB();
 $breeds = $DBobject->getCatBreed();
 $DBobject->fillCatBreedToDB($breeds);
-$catImgArcArray = $DBobject->getCatImg($breeds);
-$DBobject->fillCatImg($breeds, $catImgArcArray);
+$catImgSrcArray = $DBobject->getCatImg($breeds);
+$DBobject->fillCatImg($breeds, $catImgSrcArray);
