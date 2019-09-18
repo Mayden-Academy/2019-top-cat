@@ -82,6 +82,7 @@ function fillCatBreedToDB(PDO $db, array $catBreeds)
         $sql = $db->prepare('INSERT INTO `breed` (breed) VALUES (\'' . $breed . '\');');
         $sql->execute();
     }
+    echo "Cat breeds added to database.";
 }
 
 /**
