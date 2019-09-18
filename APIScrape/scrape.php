@@ -91,31 +91,31 @@ function fillCatBreedToDB(PDO $db, array $catBreeds)
  */
 function getCatImgURLs(array $catBreeds):array
 {
-    $imgSrcArray = [];
+    $imageSrcArray = [];
     foreach ($catBreeds as $id => $name) {
-        $catImgApiUrl = 'https://api.thecatapi.com/v1/images/search?breed_ids=' . $id . '&limit=21';
+        $catImageApiUrl = 'https://api.thecatapi.com/v1/images/search?breed_ids=' . $id . '&limit=21';
         $curl = curl_init();
         curl_setopt_array($curl, array(
-            CURLOPT_URL => $catImgApiUrl,
+            CURLOPT_URL => $catImageApiUrl,
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_HTTPHEADER => array(
                 'x-api-key: ec254e44-3996-458b-8522-4933954d8fcd'
             ),
         ));
-        $imgApiResponse = curl_exec($curl);
+        $imageApiResponse = curl_exec($curl);
         $error = curl_error($curl);
         curl_close($curl);
 
-        $responseArray = json_decode($imgApiResponse, true);
+        $responseArray = json_decode($imageApiResponse, true);
 
-        $breedImgs = [];
+        $breedImages = [];
         foreach($responseArray as $item) {
-            array_push($breedImgs, $item["url"]);
+            array_push($breedImages, $item["url"]);
         }
-        $imgSrcArray[$name] = $breedImgs;
+        $imageSrcArray[$name] = $breedImages;
     }
-    return $imgSrcArray;
+    return $imageSrcArray;
 }
 
 /**
@@ -126,15 +126,15 @@ function getCatImgURLs(array $catBreeds):array
  * @param array The list of cat img URLs
  * @return void
  */
-function fillCatImgs(PDO $db, array $catBreedArray, array $catImgSrcArray)
+function fillCatImages(PDO $db, array $catBreedArray, array $catImageSrcArray)
 {
     $catBreedIndexedArray = [];
     foreach($catBreedArray as $breed) {
         $catBreedIndexedArray[] = $breed;
     }
     $sqlArray = [];
-    for($breedIndex = 0; $breedIndex < count($catImgSrcArray); $breedIndex++) {
-        foreach($catImgSrcArray[$catBreedIndexedArray[$breedIndex]] as $url) {
+    for($breedIndex = 0; $breedIndex < count($catImageSrcArray); $breedIndex++) {
+        foreach($catImageSrcArray[$catBreedIndexedArray[$breedIndex]] as $url) {
             $breedID = $breedIndex + 1;
             $sqlArray[] = "('$url', $breedID)";
         }
@@ -149,5 +149,5 @@ function fillCatImgs(PDO $db, array $catBreedArray, array $catImgSrcArray)
 createDatabase($dbconnection);
 $breeds = getCatBreeds();
 fillCatBreedToDB($dbconnection, $breeds);
-$catImgSrcArray = getCatImgURLs($breeds);
-fillCatImgs($dbconnection, $breeds, $catImgSrcArray);
+$catImageSrcArray = getCatImgURLs($breeds);
+fillCatImages($dbconnection, $breeds, $catImageSrcArray);
