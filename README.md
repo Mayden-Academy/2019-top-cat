@@ -20,6 +20,7 @@
 <br />
 <br />
 <br />
+
 #### DB class
 
 ###### *Utilities/DB.php*
@@ -29,6 +30,7 @@
 <br />
 <br />
 <br />
+
 #### SQL to generate DB
 
 ###### *ref/cat-test_2019-09-16-database-design.sql*
