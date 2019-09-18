@@ -149,8 +149,6 @@ function fillCatImg(PDO $db, array $catBreedArray, array $catImgSrcArray)
 
 // Do the business:
 createDatabase($dbconnection);
-
-
 $breeds = getCatBreeds();
 fillCatBreedToDB($dbconnection, $breeds);
 $catImgSrcArray = getCatImgURLs($breeds);
