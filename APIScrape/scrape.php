@@ -76,11 +76,10 @@ function getCatBreeds():array
  * Fill the data into breed table
  * @return void
  */
-function fillCatBreedToDB($catBreeds)
+function fillCatBreedToDB(PDO $db, array $catBreeds)
 {
-    $dbconnect = $this->dbConnect();
     foreach($catBreeds as $id => $breed) {
-        $sql = $dbconnect->prepare('INSERT INTO `breed` (breed) VALUES (\'' . $breed . '\');');
+        $sql = $db->prepare('INSERT INTO `breed` (breed) VALUES (\'' . $breed . '\');');
         $sql->execute();
     }
 }
@@ -151,7 +150,7 @@ createDatabase($dbconnection);
 
 
 $breeds = getCatBreeds();
-// $DBobject->fillCatBreedToDB($breeds);
+fillCatBreedToDB($dbconnection, $breeds);
 // $catImgSrcArray = $DBobject->getCatImg($breeds);
 // $DBobject->fillCatImg($breeds, $catImgSrcArray);
 
