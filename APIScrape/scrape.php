@@ -44,6 +44,7 @@ function createDatabase(PDO $db) {
  */
 function getCatBreeds():array
 {
+
     $curl = curl_init();
     curl_setopt_array($curl, array(
         CURLOPT_URL => "https://api.thecatapi.com/v1/breeds/",
@@ -54,7 +55,11 @@ function getCatBreeds():array
         ),
     ));
     $response = curl_exec($curl);
-    $error = curl_error($curl);
+    if($response === false) {
+        echo 'Curl error: ' . curl_error($curl);
+    } else {
+        echo 'Received cat breed successfully';
+    }
     curl_close($curl);
 
     $responseArray = json_decode($response, true);
@@ -104,7 +109,11 @@ function getCatImgURLs(array $catBreeds):array
             ),
         ));
         $imgApiResponse = curl_exec($curl);
-        $error = curl_error($curl);
+        if($imgApiResponse === false) {
+            echo 'Curl error: ' . curl_error($curl);
+        } else {
+            echo 'Received cat images successfully';
+        }
         curl_close($curl);
 
         $responseArray = json_decode($imgApiResponse, true);
