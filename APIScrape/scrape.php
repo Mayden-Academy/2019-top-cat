@@ -31,7 +31,6 @@ function createDatabase(PDO $db) {
                 PRIMARY KEY (`id`),
                 UNIQUE KEY `img_src` (`img_src`)
                 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
-    
         $db->exec($sql);
         echo "Database successfully initialised.";
     } catch (PDOException $e) {
@@ -129,7 +128,7 @@ function getCatImgURLs(array $catBreeds):array
  * @param array The list of cat img URLs
  * @return void
  */
-function fillCatImg(PDO $db, array $catBreedArray, array $catImgSrcArray)
+function fillCatImgs(PDO $db, array $catBreedArray, array $catImgSrcArray)
 {
     $catBreedIndexedArray = [];
     foreach($catBreedArray as $breed) {
@@ -148,11 +147,9 @@ function fillCatImg(PDO $db, array $catBreedArray, array $catImgSrcArray)
     echo "Cat image URLs added to database.";
 }
 
-
 // Do the business:
 createDatabase($dbconnection);
 $breeds = getCatBreeds();
 fillCatBreedToDB($dbconnection, $breeds);
 $catImgSrcArray = getCatImgURLs($breeds);
-fillCatImg($dbconnection, $breeds, $catImgSrcArray);
-
+fillCatImgs($dbconnection, $breeds, $catImgSrcArray);
