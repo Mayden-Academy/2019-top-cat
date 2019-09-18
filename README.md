@@ -1,6 +1,6 @@
 # 2019-top-cat
 
-#### API scrape 
+#### API scrape <br />
 ###### *APIScrape/scrape.php*
 
 * Send API request to CatAPI using cURL
@@ -19,7 +19,7 @@
 <br />
 <br />
 <br />
-#### DB class 
+#### DB class <br />
 ###### *Utilities/DB.php*
 
 * DB class contains a PDO that connects to the database
@@ -27,7 +27,7 @@
 <br />
 <br />
 <br />
-#### SQL to generate DB 
+#### SQL to generate DB <br />
 ###### *ref/cat-test_2019-09-16-database-design.sql*
 
 * Contains query to generate cat database for the app.
