@@ -63,13 +63,11 @@ function getCatBreeds():array
 
     $responseArray = json_decode($response, true);
 
-    $breedArray = [];
-    $breedNameArray = [];
+    $associativeBreedArray = [];
     for ($i = 0; $i < count($responseArray); $i++) {
-        array_push($breedArray, $responseArray[$i]["id"]);
-        array_push($breedNameArray, $responseArray[$i]["name"]);
+        $associativeBreedArray[$responseArray[$i]["id"]] = $responseArray[$i]["name"];
     }
-    $associativeBreedArray = array_combine($breedArray, $breedNameArray);
+    var_dump($associativeBreedArray);
     return $associativeBreedArray;
 }
 
@@ -154,7 +152,7 @@ createDatabase($dbconnection);
 
 
 $breeds = getCatBreeds();
-$DBobject->fillCatBreedToDB($breeds);
-$catImgSrcArray = $DBobject->getCatImg($breeds);
-$DBobject->fillCatImg($breeds, $catImgSrcArray);
+// $DBobject->fillCatBreedToDB($breeds);
+// $catImgSrcArray = $DBobject->getCatImg($breeds);
+// $DBobject->fillCatImg($breeds, $catImgSrcArray);
 
