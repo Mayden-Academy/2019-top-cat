@@ -22,18 +22,4 @@ class CatHydrator
         $cats = $sqlStatement->fetchAll(\PDO::FETCH_CLASS, "TopCat\Entities\CatEntity");
         return $cats;
     }
-
-    // public function createCatEntitiesArray(array $cats): array
-    // {
-    //     $catEntities = [];
-    //     $i = 1;
-
-    //     foreach($cats as $cat) {
-    //         $cat{$i} = new CatEntity($cat[0], $cat[1], $cat[2]);
-
-    //         $i++;
-    //     }
-
-    //     return $catEntities
-    // }
 }
