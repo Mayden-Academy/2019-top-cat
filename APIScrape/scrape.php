@@ -26,10 +26,10 @@ function createDatabase(PDO $dbconnection) {
                
                 CREATE TABLE `img` (
                 `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-                `img-src` varchar(255) NOT NULL DEFAULT '',
+                `img_src` varchar(255) NOT NULL DEFAULT '',
                 `breed_id` int(11) unsigned NOT NULL,
                 PRIMARY KEY (`id`),
-                UNIQUE KEY `img-src` (`img-src`)
+                UNIQUE KEY `img_src` (`img_src`)
                 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
     
         $dbconnection->exec($sql);
@@ -92,7 +92,7 @@ function fillCatBreedToDB(PDO $db, array $catBreeds)
  * Return an associative array of breed name as the $key and all the image source url belongs to that breed as $value(which is in array format)
  * @return array
  */
-function getCatImg(array $catBreeds):array
+function getCatImgURLs(array $catBreeds):array
 {
     $imgSrcArray = [];
     foreach ($catBreeds as $id => $name) {
@@ -128,9 +128,8 @@ function getCatImg(array $catBreeds):array
  * Create a new array $sqlArray which is the array of strings consist of 'img url($url)' and 'breed id($breedID)' that will be pushed to database directly as is
  * @return void
  */
-function fillCatImg($catBreedArray, $catImgSrcArray)
+function fillCatImg(PDO $db, array $catBreedArray, array $catImgSrcArray)
 {
-    $dbconnect = $this->dbConnect();
     $catBreedIndexedArray = [];
     foreach($catBreedArray as $breed) {
         $catBreedIndexedArray[] = $breed;
@@ -143,7 +142,7 @@ function fillCatImg($catBreedArray, $catImgSrcArray)
         }
     }
     $sqlString = implode(',', $sqlArray);
-    $sql = $dbconnect->prepare('INSERT INTO `img` (img_src, breed_id) VALUES ' . $sqlString . ';');
+    $sql = $db->prepare('INSERT INTO `img` (img_src, breed_id) VALUES ' . $sqlString . ';');
     $sql->execute();
 }
 
@@ -154,6 +153,6 @@ createDatabase($dbconnection);
 
 $breeds = getCatBreeds();
 fillCatBreedToDB($dbconnection, $breeds);
-// $catImgSrcArray = $DBobject->getCatImg($breeds);
-// $DBobject->fillCatImg($breeds, $catImgSrcArray);
+$catImgSrcArray = getCatImgURLs($breeds);
+fillCatImg($dbconnection, $breeds, $catImgSrcArray);
 
