@@ -86,10 +86,10 @@ function fillCatBreedToDB(PDO $db, array $catBreeds)
 }
 
 /**
- * Get the return value of getCatBreed() method
- * Use the breed id to use it in the API url to send the request
- * Make the response into an array
+ * Use the list of cat breeds to make the API requests so we can get URLs
+ * of cat pictures to hotlink in the app.
  * 
+ * @param array of cat breeds
  * @return array of breed names => array of strings representing the image URLs
  */
 function getCatImgURLs(array $catBreeds):array
@@ -122,10 +122,11 @@ function getCatImgURLs(array $catBreeds):array
 }
 
 /**
- * Get DB connection from the dbConnect() method
- * Get the return value from getCatImg() method
- * Get the return value of getCatBreed() method, turn it into an indexed array
- * Create a new array $sqlArray which is the array of strings consist of 'img url($url)' and 'breed id($breedID)' that will be pushed to database directly as is
+ * Puts the cat image URLs into the database.
+ * 
+ * @param PDO $db the database to use
+ * @param array The list of cat breeds
+ * @param array The list of cat img URLs
  * @return void
  */
 function fillCatImg(PDO $db, array $catBreedArray, array $catImgSrcArray)
