@@ -7,9 +7,8 @@ class DB
     private $username = 'root';
     private $password = '';
 
-    // Create connection
-
     /**
+     * Create DB connection
      * @return PDO
      */
     public function dbConnect()
@@ -88,10 +87,8 @@ class DB
             foreach($responseArray as $item) {
                 array_push($breedImgs, $item["url"]);
             }
-            //array_push($imgSrcArray, $breedImgs);   //Swap array_push for method that gives key of breed name
             $imgSrcArray[$name] = $breedImgs;
         }
-        //var_dump($imgSrcArray);
         return $imgSrcArray;
     }
 
@@ -107,15 +104,8 @@ class DB
             $catBreedIndexedArray[] = $breed;
         }
 
-        var_dump($catBreedIndexedArray);
-        echo '</br>';
-        echo '</br>';
-
         $sqlArray = [];
 
-        var_dump($sqlArray);
-        echo '</br>';
-        echo '</br>';
         for($breedIndex = 0; $breedIndex < count($catImgSrcArray); $breedIndex++) {
             foreach($catImgSrcArray[$catBreedIndexedArray[$breedIndex]] as $url) {
                 $breedID = $breedIndex + 1;
@@ -123,23 +113,14 @@ class DB
             }
         }
 
-        var_dump($sqlArray);
-        echo '</br>';
-        echo '</br>';
-
         $sqlString = implode(',', $sqlArray);
-
-        echo $sqlString;
-//        echo '</br>';
-//        echo '</br>';
 
         $sql = $dbconnect->prepare('INSERT INTO `img` (img_src, breed_id) VALUES ' . $sqlString . ';');
         $sql->execute();
     }
-
 }
 
 $test = new DB();
-$result = $test->fillCatImg();
+//$result = $test->fillCatImg();
 
 
