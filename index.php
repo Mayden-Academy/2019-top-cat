@@ -33,7 +33,6 @@ $dropdownBreeds = populateDropdown($breeds);
 
 $catshtml = drawCats($cats);
 
-var_dump($breeds[0]);
 
 ?>
 <!DOCTYPE html>
