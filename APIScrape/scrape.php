@@ -11,10 +11,10 @@ $dbconnection = $db->dbConnect();
  */
 function createDatabase(PDO $db) {
     try {
-        $sql = "DROP DATABASE IF EXISTS `CatDB`;
-                CREATE DATABASE `CatDB`;
+        $sql = "DROP DATABASE IF EXISTS `cat-test`;
+                CREATE DATABASE `cat-test`;
                 
-                USE `CatDB`;
+                USE `cat-test`;
                 CREATE TABLE `breed` (
                 `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
                 `breed` varchar(255) NOT NULL DEFAULT '',
