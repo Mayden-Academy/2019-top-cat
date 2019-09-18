@@ -1,12 +1,20 @@
 <?php
-require_once 'utilities/DB.php';
+
+require_once __DIR__ . '/vendor/autoload.php';
+
+use TopCat\Hydrators\CatHydrator;
 
 $db = new DB();
 $dbconnection = $db->dbConnect();
+
 $breeds = [];
 $breedSql = $dbconnection->prepare('SELECT `breed` FROM `breed`');
 $breedSql->execute();
 $breeds = $breedSql->fetchAll();
+
+$catHydrator = new TopCat\Hydrators\CatHydrator($dbconnection);
+
+$cats = $catHydrator->createCatEntitiesArray(1);
 
 /***
  * Iterates through all breeds and populates
@@ -15,7 +23,6 @@ $breeds = $breedSql->fetchAll();
  * @param $breeds
  * @return string
  */
-
 function populateDropdown(array $breeds): string
 {
     $stringyBreeds = '';
@@ -33,10 +40,8 @@ function populateDropdown(array $breeds): string
  * @param array $cats
  * @return string
  */
-
-function drawCats(array $cats): string
-{
-    $stringyCats = '';
+function drawCats(array $cats) :string {
+      $stringyCats = '';
     foreach ($cats as $cat) {
         $stringyCats .= '<div class="cat-image"><img src="' . $cat->image . '" alt="A cat"></div>';
     }
@@ -44,7 +49,6 @@ function drawCats(array $cats): string
 }
 
 $dropdownBreeds = populateDropdown($breeds);
-
 $catshtml = drawCats($cats);
 
 
