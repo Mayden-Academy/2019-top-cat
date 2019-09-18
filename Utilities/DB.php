@@ -58,10 +58,9 @@ class DB
      * Fill the data into breed table
      * @return void
      */
-    public function fillCatBreedToDB()
+    public function fillCatBreedToDB($catBreeds)
     {
         $dbconnect = $this->dbConnect();
-        $catBreeds = $this->getCatBreed();
         foreach($catBreeds as $id => $breed) {
             $sql = $dbconnect->prepare('INSERT INTO `breed` (breed) VALUES (\'' . $breed . '\');');
             $sql->execute();
@@ -75,9 +74,8 @@ class DB
      * Return an associative array of breed name as the $key and all the image source url belongs to that breed as $value(which is in array format)
      * @return array
      */
-    public function getCatImg()
+    public function getCatImg($catBreeds)
     {
-        $catBreeds = $this->getCatBreed();
         $imgSrcArray = [];
         foreach ($catBreeds as $id => $name) {
             $catImgApiUrl = 'https://api.thecatapi.com/v1/images/search?breed_ids=' . $id . '&limit=21';
@@ -110,11 +108,9 @@ class DB
      * Create a new array $sqlArray which is the array of strings consist of 'img url($url)' and 'breed id($breedID)' that will be pushed to database directly as is
      * @return void
      */
-    public function fillCatImg()
+    public function fillCatImg($catBreedArray, $catImgSrcArray)
     {
         $dbconnect = $this->dbConnect();
-        $catImgSrcArray = $this->getCatImg();
-        $catBreedArray = $this->getCatBreed();
         $catBreedIndexedArray = [];
         foreach($catBreedArray as $breed) {
             $catBreedIndexedArray[] = $breed;
@@ -131,3 +127,9 @@ class DB
         $sql->execute();
     }
 }
+# Make a new object and call the methods
+$DBobject = new DB();
+$breeds = $DBobject->getCatBreed();
+$DBobject->fillCatBreedToDB($breeds);
+$catImgArcArray = $DBobject->getCatImg($breeds);
+$DBobject->fillCatImg($breeds, $catImgArcArray);
