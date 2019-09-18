@@ -92,7 +92,7 @@ function fillCatBreedToDB(PDO $db, array $catBreeds)
  * Return an associative array of breed name as the $key and all the image source url belongs to that breed as $value(which is in array format)
  * @return array
  */
-function getCatImg($catBreeds)
+function getCatImg(array $catBreeds):array
 {
     $imgSrcArray = [];
     foreach ($catBreeds as $id => $name) {
@@ -111,7 +111,7 @@ function getCatImg($catBreeds)
         curl_close($curl);
 
         $responseArray = json_decode($imgApiResponse, true);
-        
+
         $breedImgs = [];
         foreach($responseArray as $item) {
             array_push($breedImgs, $item["url"]);
