@@ -4,7 +4,7 @@ require_once 'utilities/DB.php';
 $db = new DB();
 $dbconnection = $db->dbConnect();
 $breeds = [];
-$breedSql = $db->prepare('SELECT `breed` FROM `breed`');
+$breedSql = $dbconnection->prepare('SELECT `breed` FROM `breed`');
 $breedSql->execute();
 $breeds = $breedSql->fetchAll();
 
