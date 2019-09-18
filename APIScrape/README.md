@@ -1,6 +1,21 @@
-TheCatApi // Developer Experience
-https://docs.thecatapi.com/
+# API Scraper
 
+A command-line utility for creating the database for the Top Cat app.
+
+* Makes API requests to get:
+    * A list of cat breeds
+    * Image URLs for cats from each breed
+* **To run the script your mySQL server must already have a database named `cat-test`!!**
+
+To use: 
+1. Make sure you are in the APIScrape directory
+2. `$ php scrape.php`
+
+What follows is a description of how theCatAPI works.
+
+## theCatApi
+
+https://docs.thecatapi.com/
 
 **Authentication (Request Header)**
 * The best & most secure way to send it
