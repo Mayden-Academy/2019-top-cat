@@ -38,11 +38,9 @@ class DB
                 'x-api-key: ec254e44-3996-458b-8522-4933954d8fcd'
             ),
         ));
-
         $response = curl_exec($curl);
         $error = curl_error($curl);
         curl_close($curl);
-
         $responseArray = json_decode($response, true);
         $breedArray = [];
         $breedNameArray = [];
@@ -92,14 +90,11 @@ class DB
                     'x-api-key: ec254e44-3996-458b-8522-4933954d8fcd'
                 ),
             ));
-
             $imgApiResponse = curl_exec($curl);
             $error = curl_error($curl);
             curl_close($curl);
-
             $responseArray = json_decode($imgApiResponse, true);
             $breedImgs = [];
-
             foreach($responseArray as $item) {
                 array_push($breedImgs, $item["url"]);
             }
@@ -121,22 +116,17 @@ class DB
         $catImgSrcArray = $this->getCatImg();
         $catBreedArray = $this->getCatBreed();
         $catBreedIndexedArray = [];
-
         foreach($catBreedArray as $breed) {
             $catBreedIndexedArray[] = $breed;
         }
-
         $sqlArray = [];
-
         for($breedIndex = 0; $breedIndex < count($catImgSrcArray); $breedIndex++) {
             foreach($catImgSrcArray[$catBreedIndexedArray[$breedIndex]] as $url) {
                 $breedID = $breedIndex + 1;
                 $sqlArray[] = "('$url', $breedID)";
             }
         }
-
         $sqlString = implode(',', $sqlArray);
-
         $sql = $dbconnect->prepare('INSERT INTO `img` (img_src, breed_id) VALUES ' . $sqlString . ';');
         $sql->execute();
     }
