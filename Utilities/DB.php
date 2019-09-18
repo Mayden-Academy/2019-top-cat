@@ -21,6 +21,10 @@ class DB
     }
 
     /**
+     * Send API request to the CatAPI
+     * Expected response is the JSON of all the cat breed id - which is the abbreviation of breed name (first four characters of the name)
+     * Changed JSON response to an array = $responseArray
+     * Return an associative array of breed id as $key and breed name as $ value
      * @return array
      */
     public function getCatBreed()
@@ -50,6 +54,12 @@ class DB
         return $associativeBreedArray;
     }
 
+    /**
+     * Get DB connection from the dbConnect() method
+     * Get the return value of getCatBreed() method
+     * Fill the data into breed table
+     * @return void
+     */
     public function fillCatBreedToDB()
     {
         $dbconnect = $this->dbConnect();
@@ -60,7 +70,13 @@ class DB
         }
     }
 
-    // Get img src from the Cat API
+    /**
+     * Get the return value of getCatBreed() method
+     * Use the breed id to use it in the API url to send the request
+     * Make the response into an array
+     * Return an associative array of breed name as the $key and all the image source url belongs to that breed as $value(which is in array format)
+     * @return array
+     */
     public function getCatImg()
     {
         $catBreeds = $this->getCatBreed();
@@ -92,11 +108,17 @@ class DB
         return $imgSrcArray;
     }
 
-    // Fill img src to table
+    /**
+     * Get DB connection from the dbConnect() method
+     * Get the return value from getCatImg() method
+     * Get the return value of getCatBreed() method, turn it into an indexed array
+     * Create a new array $sqlArray which is the array of strings consist of 'img url($url)' and 'breed id($breedID)' that will be pushed to database directly as is
+     * @return voide
+     */
     public function fillCatImg()
     {
-        $catImgSrcArray = $this->getCatImg();
         $dbconnect = $this->dbConnect();
+        $catImgSrcArray = $this->getCatImg();
         $catBreedArray = $this->getCatBreed();
         $catBreedIndexedArray = [];
 
@@ -119,8 +141,3 @@ class DB
         $sql->execute();
     }
 }
-
-$test = new DB();
-//$result = $test->fillCatImg();
-
-
