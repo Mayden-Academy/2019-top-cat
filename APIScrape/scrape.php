@@ -1,8 +1,10 @@
 <?php
 
-require_once "../Utilities/DB.php";
+require_once __DIR__ . '/vendor/autoload.php';
 
-$db = new DB();
+use TopCat\Utilities\DB;
+
+$db = new TopCat\Utilities\DB();
 $dbconnection = $db->dbConnect();
 
 /**

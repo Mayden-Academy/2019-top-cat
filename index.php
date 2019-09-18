@@ -3,8 +3,9 @@
 require_once __DIR__ . '/vendor/autoload.php';
 
 use TopCat\Hydrators\CatHydrator;
+use TopCat\Utilities\DB;
 
-$db = new DB();
+$db = new TopCat\Utilities\DB();
 $dbconnection = $db->dbConnect();
 
 $breeds = [];
