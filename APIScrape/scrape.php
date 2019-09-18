@@ -67,7 +67,6 @@ function getCatBreeds():array
     for ($i = 0; $i < count($responseArray); $i++) {
         $associativeBreedArray[$responseArray[$i]["id"]] = $responseArray[$i]["name"];
     }
-    var_dump($associativeBreedArray);
     return $associativeBreedArray;
 }
 
