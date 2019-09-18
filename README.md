@@ -8,8 +8,9 @@
     * List of cat breeds
     * All the img src url of all the cat breeds
     
-* To run it, in the command line type 
-**You must be inside the APIScrape directory**
+* To run the script you must already have a database by the name `cat-test`
+* Then type in the command line 
+**(You must be inside the APIScrape directory)**
 
     ```$ php scrape.php ```
 <br />
