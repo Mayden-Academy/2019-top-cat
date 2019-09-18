@@ -28,6 +28,13 @@ function populateDropdown($breeds)
     return $stringyBreeds;
 }
 
+/***
+ * Iterates through cat images and displays them on the page
+ *
+ * @param array $cats
+ * @return string
+ */
+
 function drawCats(array $cats): string
 {
     $stringyCats = '';
