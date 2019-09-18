@@ -11,8 +11,6 @@ $dbconnection = $db->dbConnect();
  */
 function createDatabase(PDO $db) {
     try {
-        //$conn = new PDO("mysql:host=192.168.20.20", $username, $password);
-        //$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sql = "DROP DATABASE IF EXISTS `cat-test`;
                 CREATE DATABASE `cat-test`;
                 
