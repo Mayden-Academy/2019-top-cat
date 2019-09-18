@@ -109,7 +109,9 @@ function getCatImg($catBreeds)
         $imgApiResponse = curl_exec($curl);
         $error = curl_error($curl);
         curl_close($curl);
+
         $responseArray = json_decode($imgApiResponse, true);
+        
         $breedImgs = [];
         foreach($responseArray as $item) {
             array_push($breedImgs, $item["url"]);
