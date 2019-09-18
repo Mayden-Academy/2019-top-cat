@@ -15,11 +15,10 @@
 **(you must be inside the APIScrape directory)**
 
     ``` php scrape.php ```
-    
-
-
-
-    
+<br />
+<br />
+<br />
+<br />
 #### DB class 
 ###### *Utilities/DB.php*
 
