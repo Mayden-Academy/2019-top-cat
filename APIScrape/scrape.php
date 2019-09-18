@@ -2,6 +2,8 @@
 
 require_once "../Utilities/DB.php";
 
+define('API_KEY', 'x-api-key: ec254e44-3996-458b-8522-4933954d8fcd');
+
 $db = new DB();
 $dbconnection = $db->dbConnect();
 
@@ -49,9 +51,7 @@ function getCatBreeds():array
         CURLOPT_URL => "https://api.thecatapi.com/v1/breeds/",
         CURLOPT_CUSTOMREQUEST => "GET",
         CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_HTTPHEADER => array(
-            'x-api-key: ec254e44-3996-458b-8522-4933954d8fcd'
-        ),
+        CURLOPT_HTTPHEADER => [ API_KEY ],
     ));
     $response = curl_exec($curl);
     $error = curl_error($curl);
@@ -99,9 +99,7 @@ function getCatImgURLs(array $catBreeds):array
             CURLOPT_URL => $catImgApiUrl,
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_HTTPHEADER => array(
-                'x-api-key: ec254e44-3996-458b-8522-4933954d8fcd'
-            ),
+            CURLOPT_HTTPHEADER => [ API_KEY ]
         ));
         $imgApiResponse = curl_exec($curl);
         $error = curl_error($curl);
