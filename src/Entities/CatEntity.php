@@ -1,7 +1,6 @@
 <?php
 
-namespace entities;
-
+namespace TopCat\Entities;
 class CatEntity
 {
     private $id;
