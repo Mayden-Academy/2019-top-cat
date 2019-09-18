@@ -44,7 +44,7 @@ function populateDropdown(array $breeds): string
 function drawCats(array $cats) :string {
       $stringyCats = '';
     foreach ($cats as $cat) {
-        $stringyCats .= '<div class="cat-image"><img src="' . $cat->image . '" alt="A cat"></div>';
+        $stringyCats .= '<div class="cat-image"><img src="' . $cat->getImage() . '" alt="A cat"></div>';
     }
     return $stringyCats;
 }
