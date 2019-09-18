@@ -1,5 +1,6 @@
 # 2019-top-cat
 
+
 ## API scrape
 ### *APIScrape/scrape.php*
 
@@ -11,13 +12,15 @@
 **You must be inside the APIScrape directory**
 
     ```$ php scrape.php ```
-    
-    
+<br />
+<br />
+
 ## DB class
 ### *Utilities/DB.php*
 
 * DB class contains a PDO that connects to the database
-
+<br />
+<br />
 
 ## SQL to generate DB
 ### *ref/cat-test_2019-09-16-database-design.sql*
