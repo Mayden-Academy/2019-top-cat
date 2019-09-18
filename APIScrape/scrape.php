@@ -14,7 +14,7 @@ function createDatabase(PDO $db) {
         $sql = "DROP DATABASE IF EXISTS `cat-test`;
                 CREATE DATABASE `cat-test`;
                 
-                use `cat-test`;
+                USE `cat-test`;
                 CREATE TABLE `breed` (
                 `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
                 `breed` varchar(255) NOT NULL DEFAULT '',
