@@ -40,11 +40,10 @@ function createDatabase(PDO $db) {
 }
 
 /**
- * Send API request to the CatAPI
- * Expected response is the JSON of all the cat breed id - which is the abbreviation of breed name (first four characters of the name)
- * Changed JSON response to an array = $responseArray
- * Return an associative array of breed id as $key and breed name as $ value
- * @return array
+ * Make API request to get all of the breeds from theCatAPI.
+ * 
+ * @return array of breeds as 4-character breed id => breed name
+ * e.g. "ABYS" => "Abyssinian"
  */
 function getCatBreeds():array
 {
@@ -71,9 +70,10 @@ function getCatBreeds():array
 }
 
 /**
- * Get DB connection from the dbConnect() method
- * Get the return value of getCatBreed() method
- * Fill the data into breed table
+ * Puts the list of breeds into the database.
+ * 
+ * @param PDO $db - the database to insert into.
+ * @param array $catBreeds - the list of cat breeds. As breed id => breed name.
  * @return void
  */
 function fillCatBreedToDB(PDO $db, array $catBreeds)
@@ -89,8 +89,8 @@ function fillCatBreedToDB(PDO $db, array $catBreeds)
  * Get the return value of getCatBreed() method
  * Use the breed id to use it in the API url to send the request
  * Make the response into an array
- * Return an associative array of breed name as the $key and all the image source url belongs to that breed as $value(which is in array format)
- * @return array
+ * 
+ * @return array of breed names => array of strings representing the image URLs
  */
 function getCatImgURLs(array $catBreeds):array
 {
@@ -144,6 +144,7 @@ function fillCatImg(PDO $db, array $catBreedArray, array $catImgSrcArray)
     $sqlString = implode(',', $sqlArray);
     $sql = $db->prepare('INSERT INTO `img` (img_src, breed_id) VALUES ' . $sqlString . ';');
     $sql->execute();
+    echo "Cat image URLs added to database.";
 }
 
 
