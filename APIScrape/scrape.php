@@ -2,6 +2,8 @@
 
 require_once "../Utilities/DB.php";
 
+define('API_KEY', 'x-api-key: ec254e44-3996-458b-8522-4933954d8fcd');
+
 $db = new DB();
 $dbconnection = $db->dbConnect();
 
@@ -44,17 +46,20 @@ function createDatabase(PDO $db) {
  */
 function getCatBreeds():array
 {
+
     $curl = curl_init();
     curl_setopt_array($curl, array(
         CURLOPT_URL => "https://api.thecatapi.com/v1/breeds/",
         CURLOPT_CUSTOMREQUEST => "GET",
         CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_HTTPHEADER => array(
-            'x-api-key: ec254e44-3996-458b-8522-4933954d8fcd'
-        ),
+        CURLOPT_HTTPHEADER => [ API_KEY ],
     ));
     $response = curl_exec($curl);
-    $error = curl_error($curl);
+    if($response === false) {
+        echo 'Curl error: ' . curl_error($curl);
+    } else {
+        echo 'Received cat breed successfully';
+    }
     curl_close($curl);
 
     $responseArray = json_decode($response, true);
@@ -84,7 +89,7 @@ function fillCatBreedToDB(PDO $db, array $catBreeds)
 
 /**
  * Use the list of cat breeds to make the API requests so we can get URLs
- * of cat pictures to hotlink in the app.
+ * of cat pictures to link to in the app.
  * 
  * @param array of cat breeds
  * @return array of breed names => array of strings representing the image URLs
@@ -99,12 +104,15 @@ function getCatImgURLs(array $catBreeds):array
             CURLOPT_URL => $catImageApiUrl,
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_HTTPHEADER => array(
-                'x-api-key: ec254e44-3996-458b-8522-4933954d8fcd'
-            ),
+            CURLOPT_HTTPHEADER => [ API_KEY ]
         ));
         $imageApiResponse = curl_exec($curl);
-        $error = curl_error($curl);
+        if($imageApiResponse === false) {
+            echo 'Curl error: ' . curl_error($curl);
+        } else {
+            echo 'Received cat images successfully';
+        }
+
         curl_close($curl);
 
         $responseArray = json_decode($imageApiResponse, true);
