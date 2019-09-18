@@ -84,7 +84,7 @@ function fillCatBreedToDB(PDO $db, array $catBreeds)
 
 /**
  * Use the list of cat breeds to make the API requests so we can get URLs
- * of cat pictures to hotlink in the app.
+ * of cat pictures to link to in the app.
  * 
  * @param array of cat breeds
  * @return array of breed names => array of strings representing the image URLs
