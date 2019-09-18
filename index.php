@@ -1,9 +1,8 @@
 <?php
 require_once 'utilities/DB.php';
 
-$dbConnection = new DB();
-
-$db = $dbConnection->getPDO();
+$db = new DB();
+$dbconnection = $db->dbConnect();
 $breeds = [];
 $breedSql = $db->prepare('SELECT `breed` FROM `breed`');
 $breedSql->execute();
