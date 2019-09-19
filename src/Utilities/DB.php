@@ -1,5 +1,7 @@
 <?php
 
+namespace TopCat\Utilities;
+
 class DB
 {
 
@@ -13,10 +15,10 @@ class DB
      */
     public function dbConnect()
     {
-        $dbconnect = new PDO($this->serverdb, $this->username, $this->password);
+        $dbconnect = new \PDO($this->serverdb, $this->username, $this->password);
         $dbconnect->setAttribute(
-            PDO::ATTR_DEFAULT_FETCH_MODE,
-            PDO::FETCH_ASSOC);
+            \PDO::ATTR_DEFAULT_FETCH_MODE,
+            \PDO::FETCH_ASSOC);
         return $dbconnect;
 
     }
