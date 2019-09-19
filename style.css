@@ -113,6 +113,10 @@ form label {
   cursor: pointer;
 }
 
+.cat-id-input {
+  display: none;
+}
+
 .footer {
   height: 100px;
 }
