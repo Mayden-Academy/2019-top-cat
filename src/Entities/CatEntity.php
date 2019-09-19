@@ -8,6 +8,12 @@ class CatEntity
     private $image;
     private $breed;
 
+    public function __construct($id, $image, $breed) {
+        $this->ID = $id;
+        $this->image = $image;
+        $this->breed = $breed;
+    }
+
     public function getID()
     {
         return $this->ID;
