@@ -9,7 +9,7 @@ $dropdownBreeds = '';
 $catshtml = '';
 
 // Populate the dropdown with the list of breeds from the DB
-$breedSql = $dbConnection->prepare('SELECT `breed` FROM `breed`');
+$breedSql = $dbConnection->prepare('SELECT `breed`, `favourite_id` FROM `breed`');
 $breedSql->execute();
 $breeds = $breedSql->fetchAll();
 
@@ -29,7 +29,16 @@ if (isset($_GET['breed'])) {
         <form action="index.php" method="post">
         <input class="cat-id-input" name="breedID" value="' . $cat->getBreed() . '">
         <input class="cat-id-input" name="newFavourite" value="' . $cat->getID() . '">
-        <img class="favorite-icon" src="images/fav-icon-empty.svg" alt="">
+        <img class="favorite-icon" src="';
+
+        $breedWanted = $_GET['breed'] - 1;
+
+        if($cat->getID() == $breeds[$breedWanted]['favourite_id']) {
+            $catshtml .= 'images/fav-icon-full.svg';
+            } else { $catshtml .= 'images/fav-icon-empty.svg';
+        }
+
+        $catshtml .=  '" alt="">
         </form>
         </div>
         <img src="' . $cat->getImage() . '" alt="A cat">
@@ -50,6 +59,7 @@ if (isset($_POST['newFavourite']) && isset($_POST['breedID'])) {
 } else {
     $favouriteResponseMessage = 'Favourite POST not set';
 }
+
 
 ?>
 <!DOCTYPE html>

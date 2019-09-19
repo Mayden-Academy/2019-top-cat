@@ -109,6 +109,7 @@ form label {
 
 .favorite-icon-container .favorite-icon {
   width: 50px;
+  height: 45px;
   border-radius: 0;
   cursor: pointer;
 }
