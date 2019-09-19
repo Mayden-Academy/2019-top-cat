@@ -3,7 +3,7 @@
 class DB
 {
     private $server =  'mysql:host=192.168.20.20;';
-    private $db = 'dbname=cat-test';
+    private $db = 'dbname=cats';
     private $username = 'root';
     private $password = '';
 

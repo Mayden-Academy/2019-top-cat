@@ -6,7 +6,7 @@
 # https://github.com/sequelpro/sequelpro
 #
 # Host: 192.168.20.20 (MySQL 5.6.44)
-# Database: cat-test
+# Database: cats
 # Generation Time: 2019-09-16 15:54:45 +0000
 # ************************************************************
 

@@ -14,10 +14,10 @@ $dbConnection = $db->dbConnectToHostOnly();
  */
 function createDatabase(PDO $db) {
     try {
-        $sql = "DROP DATABASE IF EXISTS `cat-test`;
-                CREATE DATABASE `cat-test`;
+        $sql = "DROP DATABASE IF EXISTS `cats`;
+                CREATE DATABASE `cats`;
                 
-                USE `cat-test`;
+                USE `cats`;
                 CREATE TABLE `breed` (
                 `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
                 `breed` varchar(255) NOT NULL DEFAULT '',
