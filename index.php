@@ -21,11 +21,11 @@ if (isset($_GET['breed'])) {
     $cats = $catHydrator->createCatEntitiesArray((int)$_GET['breed']);
     foreach ($cats as $cat) {
         $catsHtml .= '<div class="cat-image">
-        <div class="favorite-icon-container">
+        <div class="favourite-icon-container">
         <form action="index.php" method="post">
         <input class="cat-id-input" name="breedID" value="' . $cat->getBreed() . '">
         <input class="cat-id-input" name="newFavourite" value="' . $cat->getID() . '">
-        <img class="favorite-icon" src="';
+        <img class="favourite-icon" src="';
 
         $breedWanted = $_GET['breed'] - 1;
 
@@ -54,7 +54,7 @@ if (isset($_POST['newFavourite']) && isset($_POST['breedID'])) {
     $favouriteSql->bindParam('breedID', $_POST['breedID'], PDO::PARAM_INT);
     $favouriteSql->execute();
     $favouriteResponseMessage = 'Cat successfully favourited';
-    $favouriteResponseDisplay .= '<div class="favorite-response-message">' . $favouriteResponseMessage . '</div>';
+    $favouriteResponseDisplay .= '<div class="favourite-response-message">' . $favouriteResponseMessage . '</div>';
 } else {
     $favouriteResponseMessage = 'Favourite POST not set';
 }

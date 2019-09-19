@@ -95,13 +95,13 @@ form label {
   height: 100%;
 }
 
-.favorite-icon-container {
+.favourite-icon-container {
   position: absolute;
   top: 3rem;
   right: 3.5rem;
 }
 
-.favorite-icon-container .favorite-icon {
+.favourite-icon-container .favourite-icon {
   width: 50px;
   height: 45px;
   border-radius: 0;
@@ -112,7 +112,7 @@ form label {
   display: none;
 }
 
-.favorite-response-message {
+.favourite-response-message {
   color: #000000;
 }
 
