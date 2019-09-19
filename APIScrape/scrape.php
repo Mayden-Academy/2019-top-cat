@@ -5,7 +5,7 @@ require_once "../Utilities/DB.php";
 define('API_KEY', 'x-api-key: ec254e44-3996-458b-8522-4933954d8fcd');
 
 $db = new DB();
-$dbconnection = $db->dbConnect();
+$dbConnection = $db->dbConnectToHostOnly();
 
 /**
  * Creates a new database into which to put the scraped data.
@@ -32,7 +32,7 @@ function createDatabase(PDO $db) {
                 UNIQUE KEY `img_src` (`img_src`)
                 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
         $db->exec($sql);
-        echo "Database successfully initialised.";
+        echo "Database successfully initialised.\n";
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
@@ -46,7 +46,6 @@ function createDatabase(PDO $db) {
  */
 function getCatBreeds():array
 {
-
     $curl = curl_init();
     curl_setopt_array($curl, array(
         CURLOPT_URL => "https://api.thecatapi.com/v1/breeds/",
@@ -58,7 +57,7 @@ function getCatBreeds():array
     if($response === false) {
         echo 'Curl error: ' . curl_error($curl);
     } else {
-        echo 'Received cat breed successfully';
+        echo "Received list of cat breeds successfully.\n";
     }
     curl_close($curl);
 
@@ -86,7 +85,7 @@ function fillCatBreedToDB(PDO $db, array $catBreeds)
         $sql->bindParam('breedToString', $breedToString, PDO::PARAM_STR);
         $sql->execute();
     }
-    echo "Cat breeds added to database.";
+    echo "Cat breeds added to database.\n";
 }
 
 /**
@@ -98,33 +97,38 @@ function fillCatBreedToDB(PDO $db, array $catBreeds)
  */
 function getCatImgURLs(array $catBreeds):array
 {
-    $imgSrcArray = [];
+    $imageSourceArray = [];
+    $breedCount = count($catBreeds);
+    $i = 1;
+    echo "Fetching cat image URLs...\n";
     foreach ($catBreeds as $id => $name) {
-        $catImgApiUrl = 'https://api.thecatapi.com/v1/images/search?breed_ids=' . $id . '&limit=21';
+        $catImageApiUrl = 'https://api.thecatapi.com/v1/images/search?breed_ids=' . $id . '&limit=21';
         $curl = curl_init();
         curl_setopt_array($curl, array(
-            CURLOPT_URL => $catImgApiUrl,
+            CURLOPT_URL => $catImageApiUrl,
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_HTTPHEADER => [ API_KEY ]
         ));
-        $imgApiResponse = curl_exec($curl);
-        if($imgApiResponse === false) {
+        $imageApiResponse = curl_exec($curl);
+        if($imageApiResponse === false) {
             echo 'Curl error: ' . curl_error($curl);
         } else {
-            echo 'Received cat images successfully';
+            echo "\033[2KReceived cat image URLs for breed '$name' successfully ($i of $breedCount).\r";
         }
+        $i++;
+
         curl_close($curl);
 
-        $responseArray = json_decode($imgApiResponse, true);
+        $responseArray = json_decode($imageApiResponse, true);
 
-        $breedImgs = [];
+        $breedImages = [];
         foreach($responseArray as $item) {
-            array_push($breedImgs, $item["url"]);
+            array_push($breedImages, $item["url"]);
         }
-        $imgSrcArray[$name] = $breedImgs;
+        $imageSourceArray[$name] = $breedImages;
     }
-    return $imgSrcArray;
+    return $imageSourceArray;
 }
 
 /**
@@ -132,34 +136,35 @@ function getCatImgURLs(array $catBreeds):array
  * 
  * @param PDO $db the database to use
  * @param array The list of cat breeds
- * @param array The list of cat img URLs
+ * @param array The list of cat image URLs
  * @return void
  */
-function fillCatImgs(PDO $db, array $catBreedArray, array $catImgSrcArray)
+function fillCatImages(PDO $db, array $catBreedArray, array $catImageSourceArray)
 {
     $catBreedIndexedArray = [];
     foreach($catBreedArray as $breed) {
         $catBreedIndexedArray[] = $breed;
     }
     $sqlArray = [];
-    for($breedIndex = 0; $breedIndex < count($catImgSrcArray); $breedIndex++) {
-        foreach($catImgSrcArray[$catBreedIndexedArray[$breedIndex]] as $url) {
+    for($breedIndex = 0; $breedIndex < count($catImageSourceArray); $breedIndex++) {
+        foreach($catImageSourceArray[$catBreedIndexedArray[$breedIndex]] as $url) {
             $breedID = $breedIndex + 1;
             $sqlArray[$url] = $breedID;
         }
     }
+
     foreach($sqlArray as $url=>$breedID) {
         $sql = $db->prepare('INSERT INTO `img` (img_src, breed_id) VALUES (:url, :breedID);');
         $sql->bindParam('url', $url, PDO::PARAM_STR);
         $sql->bindParam('breedID', $breedID, PDO::PARAM_STR);
         $sql->execute();
     }
-    echo "Cat image URLs added to database.";
+    echo "\033[2KAll cat image URLs added to database.\n";
 }
 
 // Do the business:
-createDatabase($dbconnection);
+createDatabase($dbConnection);
 $breeds = getCatBreeds();
-fillCatBreedToDB($dbconnection, $breeds);
-$catImgSrcArray = getCatImgURLs($breeds);
-fillCatImgs($dbconnection, $breeds, $catImgSrcArray);
+fillCatBreedToDB($dbConnection, $breeds);
+$catImageSourceArray = getCatImgURLs($breeds);
+fillCatImages($dbConnection, $breeds, $catImageSourceArray);
