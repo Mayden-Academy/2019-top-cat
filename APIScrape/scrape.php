@@ -56,7 +56,8 @@ function getCatBreeds():array
     ));
     $response = curl_exec($curl);
     if($response === false) {
-        echo 'Curl error: ' . curl_error($curl);
+        $curl_ExecuteError = 'Curl error: ' . curl_error($curl);
+        exit($curl_ExecuteError);
     } else {
         echo "Received list of cat breeds successfully.\n";
     }
@@ -112,7 +113,8 @@ function getCatImageURLs(array $catBreeds):array
         ));
         $imageApiResponse = curl_exec($curl);
         if($imageApiResponse === false) {
-            echo 'Curl error: ' . curl_error($curl);
+            $imageApiResponseError = 'Curl error: ' . curl_error($curl);
+            exit($imageApiResponseError);
         } else {
             // Little bash technique to clean up console reporting
             // Use bash escape \033[2K to clear the line before writing the message
