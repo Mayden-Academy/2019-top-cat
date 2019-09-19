@@ -37,7 +37,7 @@ if (isset($_GET['breed'])) {
         $catsHtml .=  '" alt="">
         </form>
         </div>
-        <img src="' . $cat->getImage() . '" alt="A cat">
+        <img src="' . $cat->getImage() . '" alt="'. $breeds[$cat->getBreed() - 1]['breed'] .'">
         </div>';
     }
 }
