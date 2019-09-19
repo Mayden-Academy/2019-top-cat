@@ -29,14 +29,13 @@ if (isset($_GET['breed'])) {
 }
 
 if (isset($_POST['newFavourite']) && isset($_POST['breedID'])) {
-    $favouriteSql = $dbConnection->prepare('UPDATE `breed` SET favourite_id = :newFavourite WHERE id= \':breedID\';');
+    $favouriteSql = $dbConnection->prepare('UPDATE `breed` SET favourite_id = :newFavourite WHERE id= :breedID;');
     $favouriteSql->bindParam('newFavourite', $_POST['newFavourite'], PDO::PARAM_INT);
     $favouriteSql->bindParam('breedID', $_POST['breedID'], PDO::PARAM_INT);
     $favouriteSql->execute();
     $favouriteResponseMessage = 'Cat successfully favourited';
-}
-else {
-    $favouriteResponseMessage= 'Favourite POST not set';
+} else {
+    $favouriteResponseMessage = 'Favourite POST not set';
 }
 
 ?>
