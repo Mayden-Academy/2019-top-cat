@@ -7,8 +7,7 @@ A command-line utility for creating the database for the Top Cat app.
     * Image URLs for cats from each breed
 
 To use: 
-1. Make sure you are in the APIScrape directory
-2. `$ php scrape.php`
+`$ php scrape.php`
 
 What follows is a description of how theCatAPI works.
 
