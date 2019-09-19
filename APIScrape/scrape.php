@@ -55,8 +55,8 @@ function getCatBreeds():array
     ));
     $response = curl_exec($curl);
     if($response === false) {
-        $curl_execError = 'Curl error: ' . curl_error($curl);
-        exit($curl_execError);
+        $curl_ExecuteError = 'Curl error: ' . curl_error($curl);
+        exit($curl_ExecuteError);
     } else {
         echo "Received list of cat breeds successfully.\n";
     }
