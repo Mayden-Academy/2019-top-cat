@@ -1,13 +1,10 @@
 <?php
-
-require_once __DIR__ . '/vendor/autoload.php';
-
-use TopCat\Utilities\DB;
+require_once __DIR__ . '/../vendor/autoload.php';
 
 define('API_KEY', 'x-api-key: ec254e44-3996-458b-8522-4933954d8fcd');
 
 $db = new TopCat\Utilities\DB();
-$dbconnection = $db->dbConnectToHostOnly();
+$dbConnection = $db->dbConnectToHostOnly();
 
 /**
  * Creates a new database into which to put the scraped data.
