@@ -3,11 +3,10 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 $db = new TopCat\Utilities\DB();
 $dbConnection = $db->dbConnect();
+$catHydrator = new TopCat\Hydrators\CatHydrator($dbConnection);
 
 // Populate the dropdown with the list of breeds from the DB
-$breedSql = $dbConnection->prepare('SELECT `breed` FROM `breed`');
-$breedSql->execute();
-$breeds = $breedSql->fetchAll();
+$breeds = $catHydrator->getBreeds($dbConnection);
 
 $dropdownBreeds = '';
 for ($i = 0; $i < count($breeds); $i++) {
@@ -48,7 +47,7 @@ if (isset($_GET['breed'])) {
               </select>
             </div>
           </div>
-            <input class="sub-btn" type="submit" value="Show me the cats!">
+            <input class="submit-button" type="submit" value="Show me the cats!">
         </form>
     </div>
 </div>
