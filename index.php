@@ -3,16 +3,12 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 $db = new TopCat\Utilities\DB();
 $dbConnection = $db->dbConnect();
-
-// Prepare target strings
-$dropdownBreeds = '';
-$catshtml = '';
+$catHydrator = new TopCat\Hydrators\CatHydrator($dbConnection);
 
 // Populate the dropdown with the list of breeds from the DB
-$breedSql = $dbConnection->prepare('SELECT `breed`, `favourite_id` FROM `breed`');
-$breedSql->execute();
-$breeds = $breedSql->fetchAll();
+$breeds = $catHydrator->getBreeds();
 
+$dropdownBreeds = '';
 for ($i = 0; $i < count($breeds); $i++) {
     $breed = $breeds[$i]['breed'];
     $id = $i + 1;
@@ -20,11 +16,11 @@ for ($i = 0; $i < count($breeds); $i++) {
 }
 
 // If the user has selected a breed, get and show the cats
+$catsHtml = '';
 if (isset($_GET['breed'])) {
-    $catHydrator = new TopCat\Hydrators\CatHydrator($dbConnection);
     $cats = $catHydrator->createCatEntitiesArray((int)$_GET['breed']);
     foreach ($cats as $cat) {
-        $catshtml .= '<div class="cat-image">
+        $catsHtml .= '<div class="cat-image">
         <div class="favorite-icon-container">
         <form action="index.php" method="post">
         <input class="cat-id-input" name="breedID" value="' . $cat->getBreed() . '">
@@ -34,11 +30,11 @@ if (isset($_GET['breed'])) {
         $breedWanted = $_GET['breed'] - 1;
 
         if($cat->getID() == $breeds[$breedWanted]['favourite_id']) {
-            $catshtml .= 'images/fav-icon-full.svg';
-            } else { $catshtml .= 'images/fav-icon-empty.svg';
+            $catsHtml .= 'images/fav-icon-full.svg';
+            } else { $catsHtml .= 'images/fav-icon-empty.svg';
         }
 
-        $catshtml .=  '" alt="">
+        $catsHtml .=  '" alt="">
         </form>
         </div>
         <img src="' . $cat->getImage() . '" alt="A cat">
@@ -80,23 +76,18 @@ if (isset($_POST['newFavourite']) && isset($_POST['breedID'])) {
         <h1>Top Cat</h1>
         <form action="index.php" method="get">
             <div class="form-group">
-                <div class="selector">
-                    <select name="breed" id="select-breed">
-                        <option value="0">Please select your breed</option>
-                        <?php echo $dropdownBreeds ?>
-                    </select>
-                </div>
+                <select name="breed" id="select-breed">
+                    <option value="0">Please select your breed</option>
+                    <?php echo $dropdownBreeds ?>
+                </select>
             </div>
-            <input class="sub-btn" type="submit" value="Show me the cats!">
+            <input class="submit-button" type="submit" value="Show me the cats!">
         </form>
     </div>
 </div>
-<div class="container">
+<div class="container cat-pictures">
     <?php echo $favouriteResponseDisplay; ?>
-    <div class="cat-pictures">
-        <?php echo $catshtml; ?>
-    </div>
+    <?php echo $catsHtml; ?>
 </div>
-<div class="footer"></div>
 </body>
 </html>
