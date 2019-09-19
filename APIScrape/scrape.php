@@ -8,7 +8,8 @@ $db = new DB();
 $dbConnection = $db->dbConnectToHostOnly();
 
 /**
- * Creates a new database into which to put the scraped data.
+ * @param PDO $db Takes DB containing a connection to the database.
+ *  * Creates a new database into which to put the scraped data.
  * If the database already exists, tears it down and creates a new one.
  */
 function createDatabase(PDO $db) {
