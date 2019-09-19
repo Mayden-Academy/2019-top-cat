@@ -27,8 +27,8 @@ if (isset($_GET['breed'])) {
         $catshtml .= '<div class="cat-image">
         <div class="favorite-icon-container">
         <form action="index.php" method="post">
-        <input name="breedID" value="' . $cat->getBreed() . '">
-        <input name="newFavourite" value="' . $cat->getID() . '">
+        <input class="cat-id-input" name="breedID" value="' . $cat->getBreed() . '">
+        <input class="cat-id-input" name="newFavourite" value="' . $cat->getID() . '">
         <img class="favorite-icon" src="images/fav-icon-empty.svg" alt="">
         </div>
         <img src="' . $cat->getImage() . '" alt="A cat">
