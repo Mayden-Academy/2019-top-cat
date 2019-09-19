@@ -153,7 +153,7 @@ function fillCatImages(PDO $db, array $catBreedArray, array $catImageSourceArray
     $sqlArray = [];
     for($breedIndex = 0; $breedIndex < count($catImageSourceArray); $breedIndex++) {
         foreach($catImageSourceArray[$catBreedIndexedArray[$breedIndex]] as $url) {
-            $breedID = $breedIndex + 1;
+            $breedID = $breedIndex + 1;     //add 1 to $breedIndex so that it matches the breed_id in DB's `breed` table
             $sqlArray[$url] = $breedID;
         }
     }
