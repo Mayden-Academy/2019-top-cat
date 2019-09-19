@@ -1,5 +1,5 @@
 # 2019-top-cat
-
+A small web app that will show you pictures of cats!
 
 ## API scrape
 ### *APIScrape/scrape.php*
