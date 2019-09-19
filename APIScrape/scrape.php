@@ -19,15 +19,15 @@ function createDatabase(\PDO $db) {
                 USE `cats`;
                 CREATE TABLE `breed` (
                 `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-                `breed` varchar(255) NOT NULL DEFAULT '',
-                `favourite_cat` int(11) unsigned DEFAULT NULL,
+                `breed` varchar(255) NOT NULL,
+                `favourite_id` int(11) unsigned DEFAULT NULL,
                 PRIMARY KEY (`id`),
                 UNIQUE KEY `breed` (`breed`)
                 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
                    
                 CREATE TABLE `img` (
                 `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-                `img_src` varchar(255) NOT NULL DEFAULT '',
+                `img_src` varchar(255) NOT NULL,
                 `breed_id` int(11) unsigned NOT NULL,
                 PRIMARY KEY (`id`),
                 UNIQUE KEY `img_src` (`img_src`)
