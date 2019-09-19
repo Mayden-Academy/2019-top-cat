@@ -4,15 +4,12 @@ require_once __DIR__ . '/vendor/autoload.php';
 $db = new TopCat\Utilities\DB();
 $dbConnection = $db->dbConnect();
 
-// Prepare target strings
-$dropdownBreeds = '';
-$catshtml = '';
-
 // Populate the dropdown with the list of breeds from the DB
 $breedSql = $dbConnection->prepare('SELECT `breed` FROM `breed`');
 $breedSql->execute();
 $breeds = $breedSql->fetchAll();
 
+$dropdownBreeds = '';
 for ($i = 0; $i < count($breeds); $i++) {
     $breed = $breeds[$i]['breed'];
     $id = $i + 1;
@@ -20,6 +17,7 @@ for ($i = 0; $i < count($breeds); $i++) {
 }
 
 // If the user has selected a breed, get and show the cats
+$catshtml = '';
 if (isset($_GET['breed'])) {
     $catHydrator = new TopCat\Hydrators\CatHydrator($dbConnection);
     $cats = $catHydrator->createCatEntitiesArray((int)$_GET['breed']);
