@@ -95,7 +95,7 @@ function fillCatBreedToDB(PDO $db, array $catBreeds)
  * @param array of cat breeds
  * @return array of breed names => array of strings representing the image URLs
  */
-function getCatImgURLs(array $catBreeds):array
+function getCatImageURLs(array $catBreeds):array
 {
     $imageSourceArray = [];
     $breedCount = count($catBreeds);
@@ -114,6 +114,10 @@ function getCatImgURLs(array $catBreeds):array
         if($imageApiResponse === false) {
             echo 'Curl error: ' . curl_error($curl);
         } else {
+            // Little bash technique to clean up console reporting
+            // Use bash escape \033[2K to clear the line before writing the message
+            // \r carriage returns to the beginning of the line before writing the next
+            // The console lines write in-place - much neater
             echo "\033[2KReceived cat image URLs for breed '$name' successfully ($i of $breedCount).\r";
         }
         $i++;
@@ -159,6 +163,8 @@ function fillCatImages(PDO $db, array $catBreedArray, array $catImageSourceArray
         $sql->bindParam('breedID', $breedID, PDO::PARAM_STR);
         $sql->execute();
     }
+    // Use bash escape \033[2K to clear the line before writing the message
+    // This console line overwrites what was previously there
     echo "\033[2KAll cat image URLs added to database.\n";
 }
 
@@ -166,5 +172,5 @@ function fillCatImages(PDO $db, array $catBreedArray, array $catImageSourceArray
 createDatabase($dbConnection);
 $breeds = getCatBreeds();
 fillCatBreedToDB($dbConnection, $breeds);
-$catImageSourceArray = getCatImgURLs($breeds);
+$catImageSourceArray = getCatImageURLs($breeds);
 fillCatImages($dbConnection, $breeds, $catImageSourceArray);
