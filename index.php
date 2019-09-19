@@ -48,7 +48,7 @@ if (isset($_GET['breed'])) {
               </select>
             </div>
           </div>
-            <input class="sub-btn" type="submit" value="Show me the cats!">
+            <input class="submit-button" type="submit" value="Show me the cats!">
         </form>
     </div>
 </div>
