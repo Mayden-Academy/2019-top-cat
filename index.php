@@ -20,7 +20,7 @@ $catsHtml = '';
 if (isset($_GET['breed'])) {
     $cats = $catHydrator->createCatEntitiesArray((int)$_GET['breed']);
     foreach ($cats as $cat) {
-        $catsHtml .= '<div class="cat-image"><img src="' . $cat->getImage() . '" alt="' . $breeds[$cat->getBreed()-1]['breed']  . '"></div>';
+        $catsHtml .= '<div class="cat-image"><img src="' . $cat->getImage() . '" alt="' . $breeds[$cat->getBreed() - 1]['breed'] . '"></div>';
     }
 }
 
@@ -38,14 +38,12 @@ if (isset($_GET['breed'])) {
     <div class="container">
         <h1>Top Cat</h1>
         <form action="index.php" method="get">
-          <div class="form-group">
-            <div class="selector">
-              <select name="breed" id="select-breed">
-                <option value="0">Please select your breed</option>
-                <?php echo $dropdownBreeds ?>
-              </select>
+            <div class="form-group">
+                <select name="breed" id="select-breed">
+                    <option value="0">Please select your breed</option>
+                    <?php echo $dropdownBreeds ?>
+                </select>
             </div>
-          </div>
             <input class="submit-button" type="submit" value="Show me the cats!">
         </form>
     </div>
