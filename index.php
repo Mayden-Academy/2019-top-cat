@@ -28,6 +28,8 @@ if (isset($_GET['breed'])) {
     }
 }
 
+//Checks if a POST is set for newFavourite and breedID.
+//Then updates row in Database setting the breed row to have that newFavourite ID.
 if (isset($_POST['newFavourite']) && isset($_POST['breedID'])) {
     $favouriteSql = $dbConnection->prepare('UPDATE `breed` SET favourite_id = :newFavourite WHERE id= :breedID;');
     $favouriteSql->bindParam('newFavourite', $_POST['newFavourite'], PDO::PARAM_INT);
