@@ -36,6 +36,7 @@ if (isset($_GET['breed'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Top Cat</title>
     <link rel="stylesheet" href="style.css">
+    <script defer src="js/script.js"></script>
 </head>
 <body>
 <div class="header">
