@@ -14,18 +14,15 @@ class CatEntity
         $this->breed = $breed;
     }
 
-    public function getID()
-    {
+    public function getID() {
         return $this->ID;
     }
 
-    public function getImage()
-    {
+    public function getImage() {
         return $this->image;
     }
 
-    public function getBreed()
-    {
+    public function getBreed() {
         return $this->breed;
     }
 }
