@@ -1,5 +1,7 @@
 <?php
 
+namespace TopCat\Utilities;
+
 class DB
 {
     private $server =  'mysql:host=192.168.20.20;';
@@ -13,18 +15,19 @@ class DB
      */
     public function dbConnect()
     {
-        $dbconnect = new PDO($this->server . $this->db, $this->username, $this->password);
+        $dbconnect = new \PDO($this->server . $this->db, $this->username, $this->password);
         $dbconnect->setAttribute(
-            PDO::ATTR_DEFAULT_FETCH_MODE,
-            PDO::FETCH_ASSOC);
+            \PDO::ATTR_DEFAULT_FETCH_MODE,
+            \PDO::FETCH_ASSOC);
         return $dbconnect;
     }
 
     public function dbConnectToHostOnly() {
-        $dbconnect = new PDO($this->server, $this->username, $this->password);
+        $dbconnect = new \PDO($this->server, $this->username, $this->password);
         $dbconnect->setAttribute(
-            PDO::ATTR_DEFAULT_FETCH_MODE,
-            PDO::FETCH_ASSOC);
+            \PDO::ATTR_DEFAULT_FETCH_MODE,
+            \PDO::FETCH_ASSOC);
         return $dbconnect;
+
     }
 }

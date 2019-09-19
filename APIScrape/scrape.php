@@ -1,18 +1,17 @@
 <?php
-
-require_once "../Utilities/DB.php";
+require_once __DIR__ . '/../vendor/autoload.php';
 
 define('API_KEY', 'x-api-key: ec254e44-3996-458b-8522-4933954d8fcd');
 
-$db = new DB();
+$db = new TopCat\Utilities\DB();
 $dbConnection = $db->dbConnectToHostOnly();
 
 /**
- * @param PDO $db Takes DB containing a connection to the database.
- *  * Creates a new database into which to put the scraped data.
+ * Creates a new database into which to put the scraped data.
  * If the database already exists, tears it down and creates a new one.
+ * @param PDO $db Takes DB containing a connection to the database.
  */
-function createDatabase(PDO $db) {
+function createDatabase(\PDO $db) {
     try {
         $sql = "DROP DATABASE IF EXISTS `cats`;
                 CREATE DATABASE `cats`;
