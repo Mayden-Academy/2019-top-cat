@@ -6,7 +6,7 @@ $dbConnection = $db->dbConnect();
 $catHydrator = new TopCat\Hydrators\CatHydrator($dbConnection);
 
 // Populate the dropdown with the list of breeds from the DB
-$breeds = $catHydrator->getBreeds($dbConnection);
+$breeds = $catHydrator->getBreeds();
 
 $dropdownBreeds = '';
 for ($i = 0; $i < count($breeds); $i++) {
