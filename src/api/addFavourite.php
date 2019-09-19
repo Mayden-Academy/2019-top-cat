@@ -1,5 +1,4 @@
 <?php
-
 require_once __DIR__ . '/../../vendor/autoload.php';
 
 header("Access-Control-Allow-Origin: *");
@@ -16,20 +15,23 @@ $dbConnection = $db->dbConnect();
 // get POSTed data
 $data = json_decode(file_get_contents("php://input"));
 
+// make sure this isn't empty
 if (
   !empty($data->catID) &&
   !empty($data->breed)
 ) {
   $newFavouriteCat = (integer)$data->catID;
   $ofBreed = (integer)$data->breed;
+  // TODO: put this in a try-catch like it should be
   $favouriteSql = $dbConnection->prepare("UPDATE `breed` SET `favourite_id` = :newFavourite WHERE `id`= :breedID;");
   $favouriteSql->bindParam(':newFavourite', $newFavouriteCat, PDO::PARAM_INT);
   $favouriteSql->bindParam(':breedID', $ofBreed, PDO::PARAM_INT);
   $favouriteSql->execute();
+  // Response code 201 - you successfully added data
   http_response_code(201);
   echo json_encode(["message" => "Cat $data->catID successfully favourited for breed $data->breed"]);
 } else {
-  // tell user that's a bad request
+  // Response code 400 - bad request
   http_response_code(400);
   echo json_encode(["message" => "Favouriting not successful"]);
 }
