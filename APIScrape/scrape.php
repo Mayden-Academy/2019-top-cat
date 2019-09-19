@@ -2,14 +2,14 @@
 
 require_once "../src/Utilities/DB.php";
 
-$db = new DB();
+$db = new TopCat\Utilities\DB();
 $dbconnection = $db->dbConnect();
 
 /**
  * Creates a new database into which to put the scraped data.
  * If the database already exists, tears it down and creates a new one.
  */
-function createDatabase(PDO $db) {
+function createDatabase(\PDO $db) {
     try {
         //$conn = new PDO("mysql:host=192.168.20.20", $username, $password);
         //$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
