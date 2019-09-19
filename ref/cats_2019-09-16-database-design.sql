@@ -46,6 +46,8 @@ CREATE TABLE `img` (
   `breed_id` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `img_src` (`img_src`)
+    KEY `breed_id` (`breed_id`),
+    CONSTRAINT `breed_id` FOREIGN KEY (`breed_id`) REFERENCES `breed` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
