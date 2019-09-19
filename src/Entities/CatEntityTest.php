@@ -3,7 +3,7 @@
 use PHPUnit\Framework\TestCase;
 use TopCat\Entities\CatEntity;
 
-class testCatEntity extends TestCase {
+class CatEntityTest extends TestCase {
     public function testGetIDSuccess() {
         $expected = 3;
         $cat = new CatEntity(3, 'https://cdn2.thecatapi.com/images/xxxxx.jpg', 1);
