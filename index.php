@@ -53,6 +53,5 @@ if (isset($_GET['breed'])) {
 <div class="container cat-pictures">
     <?php echo $catsHtml; ?>
 </div>
-<div class="footer"></div>
 </body>
 </html>
