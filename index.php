@@ -9,7 +9,6 @@ $dropdownBreeds = '';
 $catshtml = '';
 
 // Populate the dropdown with the list of breeds from the DB
-$breeds = [];
 $breedSql = $dbConnection->prepare('SELECT `breed` FROM `breed`');
 $breedSql->execute();
 $breeds = $breedSql->fetchAll();
@@ -60,8 +59,6 @@ if (isset($_GET['breed'])) {
         <?php echo $catshtml; ?>
     </div>
 </div>
-<div class="footer">
-
-</div>
+<div class="footer"></div>
 </body>
 </html>
