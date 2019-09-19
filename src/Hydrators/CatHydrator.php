@@ -28,4 +28,10 @@ class CatHydrator
         $cats = $sqlStatement->fetchAll(\PDO::FETCH_CLASS, "TopCat\Entities\CatEntity");
         return $cats;
     }
+
+    public function getBreeds(): array {
+        $sqlStatement = $this->db->prepare('SELECT `breed` FROM `breed`;');
+        $sqlStatement->execute();
+        return $sqlStatement->fetchAll();
+    }
 }
