@@ -27,3 +27,15 @@ To use:
 
 * Contains query to generate cat database for the app.
 * The database contains two tables - breed, img
+
+## Tests
+To run tests use PHPUnit. 
+
+This is included as a development dependency. Run 
+`$ composer install` 
+to make sure you have all of the development dependencies in your project.
+
+Test files are found alongside the files they test, so run
+`$ vendor/bin/phpunit src`
+to catch them all.
+

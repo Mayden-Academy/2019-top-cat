@@ -23,7 +23,7 @@ class CatHydrator
         $sqlStatement = $this->db->prepare($sqlCommand);
         $sqlStatement->bindParam('breedID', $breedID, \PDO::PARAM_INT);
         $sqlStatement->execute();
-        $cats = $sqlStatement->fetchAll(\PDO::FETCH_CLASS, "TopCat\Entities\CatEntity");
+        $cats = $sqlStatement->fetchAll(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE, "TopCat\Entities\CatEntity");
         return $cats;
     }
 
