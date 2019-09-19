@@ -50,10 +50,8 @@ if (isset($_GET['breed'])) {
         </form>
     </div>
 </div>
-<div class="container">
-    <div class="cat-pictures">
-        <?php echo $catsHtml; ?>
-    </div>
+<div class="container cat-pictures">
+    <?php echo $catsHtml; ?>
 </div>
 <div class="footer"></div>
 </body>
