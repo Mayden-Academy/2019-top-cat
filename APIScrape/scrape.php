@@ -20,10 +20,11 @@ function createDatabase(\PDO $db) {
                 CREATE TABLE `breed` (
                 `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
                 `breed` varchar(255) NOT NULL DEFAULT '',
+                `favourite_cat` int(11) unsigned DEFAULT NULL,
                 PRIMARY KEY (`id`),
                 UNIQUE KEY `breed` (`breed`)
                 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-               
+                   
                 CREATE TABLE `img` (
                 `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
                 `img_src` varchar(255) NOT NULL DEFAULT '',
@@ -40,7 +41,7 @@ function createDatabase(\PDO $db) {
 
 /**
  * Make API request to get all of the breeds from theCatAPI.
- * 
+ *
  * @return array of breeds as 4-character breed id => breed name
  * e.g. "ABYS" => "Abyssinian"
  */
@@ -73,7 +74,7 @@ function getCatBreeds():array
 
 /**
  * Puts the list of breeds into the database.
- * 
+ *
  * @param PDO $db - the database to insert into.
  * @param array $catBreeds - the list of cat breeds. As breed id => breed name.
  * @return void
@@ -91,7 +92,7 @@ function fillCatBreedToDB(PDO $db, array $catBreeds)
 /**
  * Use the list of cat breeds to make the API requests so we can get URLs
  * of cat pictures to link to in the app.
- * 
+ *
  * @param array of cat breeds
  * @return array of breed names => array of strings representing the image URLs
  */
@@ -138,7 +139,7 @@ function getCatImageURLs(array $catBreeds):array
 
 /**
  * Puts the cat image URLs into the database.
- * 
+ *
  * @param PDO $db the database to use
  * @param array The list of cat breeds
  * @param array The list of cat image URLs

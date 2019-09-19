@@ -7,7 +7,7 @@
 #
 # Host: 192.168.20.20 (MySQL 5.6.44)
 # Database: cats
-# Generation Time: 2019-09-16 15:54:45 +0000
+# Generation Time: 2019-09-19 10:40:32 +0000
 # ************************************************************
 
 
@@ -27,7 +27,8 @@ DROP TABLE IF EXISTS `breed`;
 
 CREATE TABLE `breed` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `breed` varchar(255) NOT NULL,
+  `breed` varchar(255) NOT NULL DEFAULT '',
+  `favourite_cat` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `breed` (`breed`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -41,12 +42,10 @@ DROP TABLE IF EXISTS `img`;
 
 CREATE TABLE `img` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `img_src` varchar(255) NOT NULL,
+  `img_src` varchar(255) NOT NULL DEFAULT '',
   `breed_id` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `img_src` (`img_src`),
-  KEY `breed_id` (`breed_id`),
-  CONSTRAINT `breed_id` FOREIGN KEY (`breed_id`) REFERENCES `breed` (`id`)
+  UNIQUE KEY `img_src` (`img_src`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
