@@ -145,14 +145,15 @@ function fillCatImgs(PDO $db, array $catBreedArray, array $catImgSrcArray)
     for($breedIndex = 0; $breedIndex < count($catImgSrcArray); $breedIndex++) {
         foreach($catImgSrcArray[$catBreedIndexedArray[$breedIndex]] as $url) {
             $breedID = $breedIndex + 1;
-            $sqlArray[] = "('$url', $breedID)";
+            $sqlArray[$url] = $breedID;
         }
     }
-    $sqlString = implode(',', $sqlArray);
-
-    $sql = $db->prepare('INSERT INTO `img` (img_src, breed_id) VALUES :sqlString;');
-    $sql->bindParam('sqlString', $sqlString, PDO::PARAM_STR);
-    $sql->execute();
+    foreach($sqlArray as $url=>$breedID) {
+        $sql = $db->prepare('INSERT INTO `img` (img_src, breed_id) VALUES (:url, :breedID);');
+        $sql->bindParam('url', $url, PDO::PARAM_STR);
+        $sql->bindParam('breedID', $breedID, PDO::PARAM_STR);
+        $sql->execute();
+    }
     echo "Cat image URLs added to database.";
 }
 
