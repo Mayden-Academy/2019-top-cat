@@ -9,13 +9,14 @@ $dbConnection = $db->dbConnectToHostOnly();
 /**
  * Creates a new database into which to put the scraped data.
  * If the database already exists, tears it down and creates a new one.
+ * @param PDO $db Takes DB containing a connection to the database.
  */
 function createDatabase(\PDO $db) {
     try {
-        $sql = "DROP DATABASE IF EXISTS `cat-test`;
-                CREATE DATABASE `cat-test`;
+        $sql = "DROP DATABASE IF EXISTS `cats`;
+                CREATE DATABASE `cats`;
                 
-                USE `cat-test`;
+                USE `cats`;
                 CREATE TABLE `breed` (
                 `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
                 `breed` varchar(255) NOT NULL DEFAULT '',
@@ -54,7 +55,8 @@ function getCatBreeds():array
     ));
     $response = curl_exec($curl);
     if($response === false) {
-        echo 'Curl error: ' . curl_error($curl);
+        $curlExecuteError = 'Curl error: ' . curl_error($curl);
+        exit($curlExecuteError);
     } else {
         echo "Received list of cat breeds successfully.\n";
     }
@@ -79,9 +81,8 @@ function getCatBreeds():array
 function fillCatBreedToDB(PDO $db, array $catBreeds)
 {
     foreach($catBreeds as $id => $breed) {
-        $sql = $db->prepare('INSERT INTO `breed` (breed) VALUES (:breedToString);');
-        $breedToString = "$breed";
-        $sql->bindParam('breedToString', $breedToString, PDO::PARAM_STR);
+        $sql = $db->prepare('INSERT INTO `breed` (breed) VALUES (:breed);');
+        $sql->bindParam('breed', $breed, PDO::PARAM_STR);
         $sql->execute();
     }
     echo "Cat breeds added to database.\n";
@@ -111,7 +112,8 @@ function getCatImageURLs(array $catBreeds):array
         ));
         $imageApiResponse = curl_exec($curl);
         if($imageApiResponse === false) {
-            echo 'Curl error: ' . curl_error($curl);
+            $imageApiResponseError = 'Curl error: ' . curl_error($curl);
+            exit($imageApiResponseError);
         } else {
             // Little bash technique to clean up console reporting
             // Use bash escape \033[2K to clear the line before writing the message
@@ -151,7 +153,7 @@ function fillCatImages(PDO $db, array $catBreedArray, array $catImageSourceArray
     $sqlArray = [];
     for($breedIndex = 0; $breedIndex < count($catImageSourceArray); $breedIndex++) {
         foreach($catImageSourceArray[$catBreedIndexedArray[$breedIndex]] as $url) {
-            $breedID = $breedIndex + 1;
+            $breedID = $breedIndex + 1;     //add 1 to $breedIndex so that it matches the breed_id in DB's `breed` table
             $sqlArray[$url] = $breedID;
         }
     }
