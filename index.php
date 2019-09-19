@@ -30,6 +30,7 @@ if (isset($_GET['breed'])) {
         <input name="breedID" value="' . $cat->getBreed() . '">
         <input name="newFavourite" value="' . $cat->getID() . '">
         <img class="favorite-icon" src="images/fav-icon-empty.svg" alt="">
+        </form>
         </div>
         <img src="' . $cat->getImage() . '" alt="A cat">
         </div>';
