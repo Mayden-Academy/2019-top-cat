@@ -32,7 +32,9 @@ if (isset($_GET['breed'])) {
 //Then updates row in Database setting the breed row to have that newFavourite ID.
 if (isset($_POST['newFavourite']) && isset($_POST['breedID'])) {
     $favouriteSql = $dbConnection->prepare('UPDATE `breed` SET favourite_id = :newFavourite WHERE id= :breedID;');
+    //newFavourite is the ID of the image of the favourite cat.
     $favouriteSql->bindParam('newFavourite', $_POST['newFavourite'], PDO::PARAM_INT);
+    //breedID is the ID of the breed of cat.
     $favouriteSql->bindParam('breedID', $_POST['breedID'], PDO::PARAM_INT);
     $favouriteSql->execute();
     $favouriteResponseMessage = 'Cat successfully favourited';
