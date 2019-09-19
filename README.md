@@ -1,5 +1,5 @@
 # 2019-top-cat
-
+A small web app that will show you pictures of cats!
 
 ## API scrape
 ### *APIScrape/scrape.php*
@@ -11,8 +11,7 @@ A command-line utility for creating the database for the Top Cat app.
     * Image URLs for cats from each breed
 
 To use: 
-1. Make sure you are in the APIScrape directory
-2. `$ php scrape.php`
+`$ php scrape.php`
 <br />
 <br />
 
@@ -28,3 +27,15 @@ To use:
 
 * Contains query to generate cat database for the app.
 * The database contains two tables - breed, img
+
+## Tests
+To run tests use PHPUnit. 
+
+This is included as a development dependency. Run 
+`$ composer install` 
+to make sure you have all of the development dependencies in your project.
+
+Test files are found alongside the files they test, so run
+`$ vendor/bin/phpunit src`
+to catch them all.
+
