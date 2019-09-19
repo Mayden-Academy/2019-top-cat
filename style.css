@@ -52,8 +52,7 @@ form label {
   font-size: 2.2rem;
 }
 
-.selector select {
-  margin: 0 auto;
+#select-breed {
   height: 30px;
   width: 250px;
   background: #ffe1ec;
