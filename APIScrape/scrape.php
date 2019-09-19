@@ -102,7 +102,7 @@ function getCatImageURLs(array $catBreeds):array
     $i = 1;
     echo "Fetching cat image URLs...\n";
     foreach ($catBreeds as $id => $name) {
-        $catImageApiUrl = 'https://api.thecatapi.com/v1/images/search?breed_ids=' . $id . '&limit=21';
+        $catImageApiUrl = 'https://api.thecatapi.com/v1/images/search?breed_ids=' . $id . '&limit=100';
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_URL => $catImageApiUrl,
