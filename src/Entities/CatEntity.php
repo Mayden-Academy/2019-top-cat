@@ -4,13 +4,13 @@ namespace TopCat\Entities;
 
 class CatEntity
 {
-    private $id;
+    private $ID;
     private $image;
     private $breed;
 
     public function getID()
     {
-        return $this->id;
+        return $this->ID;
     }
 
     public function getImage()
