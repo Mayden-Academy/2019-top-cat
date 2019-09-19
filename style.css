@@ -109,6 +109,7 @@ form label {
 
 .favorite-icon-container .favorite-icon {
   width: 50px;
+  height: 45px;
   border-radius: 0;
   cursor: pointer;
 }
@@ -119,6 +120,10 @@ form label {
 
 .footer {
   height: 100px;
+}
+
+.favorite-response-message {
+  color: #000000;
 }
 
 @media screen and (max-width: 1200px) {
