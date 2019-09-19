@@ -2,8 +2,6 @@
 
 namespace TopCat\Hydrators;
 
-use TopCat\Entities\CatEntity;
-
 class CatHydrator
 {
     private $db;
@@ -19,7 +17,7 @@ class CatHydrator
      * 
      * @return array - Returns an array of Cat objects based on details acquired from database
      */
-    public function createCatEntitiesArray(\PDO $db, int $breedID): array
+    public function createCatEntitiesArray(int $breedID): array
     {
         $sqlCommand = 'SELECT `id`, `img_src` AS `image`, `breed_id` AS `breed` FROM `img` WHERE `breed_id` =:breedID';
         $sqlStatement = $this->db->prepare($sqlCommand);
