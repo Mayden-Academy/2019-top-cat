@@ -27,3 +27,10 @@ To use:
 
 * Contains query to generate cat database for the app.
 * The database contains two tables - breed, img
+
+## Tests
+To run tests use PHPUnit. 
+
+Test files are found alongside the files they test, so run
+`$ phpunit src`
+to catch them all.
