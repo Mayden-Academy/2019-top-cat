@@ -88,17 +88,36 @@ form label {
 .cat-image {
   overflow: hidden;
   padding: 20px;
-  max-width: 30%;
+  width: 30%;
+  height: 30vw;
 }
 
 .cat-image img {
   display: block;
   object-fit: cover;
   border-radius: 30px;
-  max-width: 100%;
-  height: 360px;
+  width: 100%;
+  height: 100%;
 }
 
 .footer {
   height: 100px;
+}
+
+@media screen and (max-width: 1200px) {
+  .cat-image {
+    width: 50%;
+    height: 50vw;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    width: 100%;
+  }
+
+  .cat-image {
+    width: 100%;
+    height: 100vw;
+  }
 }
