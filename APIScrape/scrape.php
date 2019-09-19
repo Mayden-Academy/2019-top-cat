@@ -80,7 +80,9 @@ function getCatBreeds():array
 function fillCatBreedToDB(PDO $db, array $catBreeds)
 {
     foreach($catBreeds as $id => $breed) {
-        $sql = $db->prepare('INSERT INTO `breed` (breed) VALUES (\'' . $breed . '\');');
+        $sql = $db->prepare('INSERT INTO `breed` (breed) VALUES (:breedToString);');
+        $breedToString = "$breed";
+        $sql->bindParam('breedToString', $breedToString, PDO::PARAM_STR);
         $sql->execute();
     }
     echo "Cat breeds added to database.\n";
@@ -147,12 +149,16 @@ function fillCatImages(PDO $db, array $catBreedArray, array $catImageSourceArray
     for($breedIndex = 0; $breedIndex < count($catImageSourceArray); $breedIndex++) {
         foreach($catImageSourceArray[$catBreedIndexedArray[$breedIndex]] as $url) {
             $breedID = $breedIndex + 1;
-            $sqlArray[] = "('$url', $breedID)";
+            $sqlArray[$url] = $breedID;
         }
     }
-    $sqlString = implode(',', $sqlArray);
-    $sql = $db->prepare('INSERT INTO `img` (img_src, breed_id) VALUES ' . $sqlString . ';');
-    $sql->execute();
+
+    foreach($sqlArray as $url=>$breedID) {
+        $sql = $db->prepare('INSERT INTO `img` (img_src, breed_id) VALUES (:url, :breedID);');
+        $sql->bindParam('url', $url, PDO::PARAM_STR);
+        $sql->bindParam('breedID', $breedID, PDO::PARAM_STR);
+        $sql->execute();
+    }
     echo "\033[2KAll cat image URLs added to database.\n";
 }
 
