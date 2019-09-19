@@ -24,7 +24,15 @@ if (isset($_GET['breed'])) {
     $catHydrator = new TopCat\Hydrators\CatHydrator($dbConnection);
     $cats = $catHydrator->createCatEntitiesArray((int)$_GET['breed']);
     foreach ($cats as $cat) {
-        $catshtml .= '<div class="cat-image"><div class="favorite-icon-container"><img class="favorite-icon" src="images/fav-icon-empty.svg" alt=""></div><img src="' . $cat->getImage() . '" alt="A cat"></div>';
+        $catshtml .= '<div class="cat-image">
+        <div class="favorite-icon-container">
+        <form action="index.php" method="post">
+        <input name="breedID" value="' . $cat->getBreed() . '">
+        <input name="newFavourite" value="' . $cat->getID() . '">
+        <img class="favorite-icon" src="images/fav-icon-empty.svg" alt="">
+        </div>
+        <img src="' . $cat->getImage() . '" alt="A cat">
+        </div>';
     }
 }
 
@@ -50,6 +58,7 @@ if (isset($_POST['newFavourite']) && isset($_POST['breedID'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Top Cat</title>
     <link rel="stylesheet" href="style.css">
+    <script defer src="js/script.js"></script>
 </head>
 <body>
 <div class="header">
