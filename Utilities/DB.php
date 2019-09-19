@@ -13,7 +13,7 @@ class DB
      */
     public function dbConnect()
     {
-        $dbconnect = new PDO($this->server .$this->db, $this->username, $this->password);
+        $dbconnect = new PDO($this->server . $this->db, $this->username, $this->password);
         $dbconnect->setAttribute(
             PDO::ATTR_DEFAULT_FETCH_MODE,
             PDO::FETCH_ASSOC);
