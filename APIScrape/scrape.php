@@ -81,7 +81,9 @@ function getCatBreeds():array
 function fillCatBreedToDB(PDO $db, array $catBreeds)
 {
     foreach($catBreeds as $id => $breed) {
-        $sql = $db->prepare('INSERT INTO `breed` (breed) VALUES (\'' . $breed . '\');');
+        $sql = $db->prepare('INSERT INTO `breed` (breed) VALUES (:breedToString);');
+        $breedToString = "$breed";
+        $sql->bindParam('breedToString', $breedToString, PDO::PARAM_STR);
         $sql->execute();
     }
     echo "Cat breeds added to database.";
@@ -147,7 +149,9 @@ function fillCatImgs(PDO $db, array $catBreedArray, array $catImgSrcArray)
         }
     }
     $sqlString = implode(',', $sqlArray);
-    $sql = $db->prepare('INSERT INTO `img` (img_src, breed_id) VALUES ' . $sqlString . ';');
+
+    $sql = $db->prepare('INSERT INTO `img` (img_src, breed_id) VALUES :sqlString;');
+    $sql->bindParam('sqlString', $sqlString, PDO::PARAM_STR);
     $sql->execute();
     echo "Cat image URLs added to database.";
 }
