@@ -95,7 +95,7 @@ function fillCatBreedToDB(PDO $db, array $catBreeds)
  * @param array of cat breeds
  * @return array of breed names => array of strings representing the image URLs
  */
-function getCatImgURLs(array $catBreeds):array
+function getCatImageURLs(array $catBreeds):array
 {
     $imageSourceArray = [];
     $breedCount = count($catBreeds);
@@ -166,5 +166,5 @@ function fillCatImages(PDO $db, array $catBreedArray, array $catImageSourceArray
 createDatabase($dbConnection);
 $breeds = getCatBreeds();
 fillCatBreedToDB($dbConnection, $breeds);
-$catImageSourceArray = getCatImgURLs($breeds);
+$catImageSourceArray = getCatImageURLs($breeds);
 fillCatImages($dbConnection, $breeds, $catImageSourceArray);
