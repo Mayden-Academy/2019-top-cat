@@ -1,59 +1,32 @@
 <?php
-
 require_once __DIR__ . '/vendor/autoload.php';
 
-use TopCat\Hydrators\CatHydrator;
-
 $db = new TopCat\Utilities\DB();
-$dbconnection = $db->dbConnect();
+$dbConnection = $db->dbConnect();
 
-$breeds = [];
-$breedSql = $dbconnection->prepare('SELECT `breed` FROM `breed`');
+// Prepare target strings
+$dropdownBreeds = '';
+$catshtml = '';
+
+// Populate the dropdown with the list of breeds from the DB
+$breedSql = $dbConnection->prepare('SELECT `breed` FROM `breed`');
 $breedSql->execute();
 $breeds = $breedSql->fetchAll();
 
-$catHydrator = new TopCat\Hydrators\CatHydrator($dbconnection);
+for ($i = 0; $i < count($breeds); $i++) {
+    $breed = $breeds[$i]['breed'];
+    $id = $i + 1;
+    $dropdownBreeds .= "<option value=\"$id\">$breed</option>";
+}
 
+// If the user has selected a breed, get and show the cats
 if (isset($_GET['breed'])) {
+    $catHydrator = new TopCat\Hydrators\CatHydrator($dbConnection);
     $cats = $catHydrator->createCatEntitiesArray((int)$_GET['breed']);
-    $catshtml = drawCats($cats);
-}
-
-/***
- * Iterates through all breeds and populates
- * the dropdown options
- *
- * @param $breeds
- * @return string
- */
-function populateDropdown(array $breeds): string
-{
-    $stringyBreeds = '';
-
-    for ($i = 0; $i < count($breeds); $i++) {
-        $breed = $breeds[$i]['breed'];
-        $id = $i + 1;
-        $stringyBreeds .= "<option value=\"$id\">$breed</option>";
-    }
-    return $stringyBreeds;
-}
-
-/***
- * Iterates through cat images and displays them on the page
- *
- * @param array $cats
- * @return string
- */
-function drawCats(array $cats) :string {
-      $stringyCats = '';
     foreach ($cats as $cat) {
-        $stringyCats .= '<div class="cat-image"><img src="' . $cat->getImage() . '" alt="A cat"></div>';
+        $catshtml .= '<div class="cat-image"><img src="' . $cat->getImage() . '" alt="A cat"></div>';
     }
-    return $stringyCats;
 }
-
-$dropdownBreeds = populateDropdown($breeds);
-
 
 ?>
 <!DOCTYPE html>
@@ -73,9 +46,7 @@ $dropdownBreeds = populateDropdown($breeds);
             <div class="selector">
               <select name="breed" id="select-breed">
                 <option value="0">Please select your breed</option>
-                <?php
-                    echo $dropdownBreeds
-                ?>
+                <?php echo $dropdownBreeds ?>
               </select>
             </div>
           </div>
@@ -85,13 +56,9 @@ $dropdownBreeds = populateDropdown($breeds);
 </div>
 <div class="container">
     <div class="cat-pictures">
-        <?php
-        echo $catshtml;
-        ?>
+        <?php echo $catshtml; ?>
     </div>
 </div>
-<div class="footer">
-
-</div>
+<div class="footer"></div>
 </body>
 </html>
