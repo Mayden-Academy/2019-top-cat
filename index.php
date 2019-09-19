@@ -18,7 +18,7 @@ for ($i = 0; $i < count($breeds); $i++) {
 // If the user has selected a breed, get and show the cats
 $catsHtml = '';
 if (isset($_GET['breed'])) {
-    $cats = $catHydrator->createCatEntitiesArray($dbConnection, (int)$_GET['breed']);
+    $cats = $catHydrator->createCatEntitiesArray((int)$_GET['breed']);
     foreach ($cats as $cat) {
         $catsHtml .= '<div class="cat-image"><img src="' . $cat->getImage() . '" alt="' . $breeds[$cat->getBreed()-1]['breed']  . '"></div>';
     }
