@@ -15,7 +15,10 @@ $breeds = $breedSql->fetchAll();
 
 $catHydrator = new TopCat\Hydrators\CatHydrator($dbconnection);
 
-$cats = $catHydrator->createCatEntitiesArray(1);
+if (isset($_GET['breed'])) {
+    $cats = $catHydrator->createCatEntitiesArray((int)$_GET['breed']);
+    $catshtml = drawCats($cats);
+}
 
 /***
  * Iterates through all breeds and populates
@@ -30,7 +33,8 @@ function populateDropdown(array $breeds): string
 
     for ($i = 0; $i < count($breeds); $i++) {
         $breed = $breeds[$i]['breed'];
-        $stringyBreeds .= "<option>$breed</option>";
+        $id = $i + 1;
+        $stringyBreeds .= "<option value=\"$id\">$breed</option>";
     }
     return $stringyBreeds;
 }
@@ -50,7 +54,6 @@ function drawCats(array $cats) :string {
 }
 
 $dropdownBreeds = populateDropdown($breeds);
-$catshtml = drawCats($cats);
 
 
 ?>
@@ -66,18 +69,18 @@ $catshtml = drawCats($cats);
 <div class="header">
     <div class="container">
         <h1>Top Cat</h1>
-        <form action="get">
-            <div class="form-group">
-                <label>Select your breed:</label>
-                <div class="selector">
-                    <select name="breed" id="select-breed">
-                        <option value="0">Please select:</option>
-                        <?php
-                        echo $dropdownBreeds
-                        ?>
-                    </select>
-                </div>
+        <form action="index.php" method="get">
+          <div class="form-group">
+            <div class="selector">
+              <select name="breed" id="select-breed">
+                <option value="0">Please select your breed</option>
+                <?php
+                    echo $dropdownBreeds
+                ?>
+              </select>
             </div>
+          </div>
+            <input class="sub-btn" type="submit" value="Show me the cats!">
         </form>
     </div>
 </div>
