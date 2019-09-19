@@ -1,9 +1,9 @@
-let target = document.querySelectorAll('.favorite-icon-container')
+let target = document.querySelectorAll('.favorite-icon')
 
 target.forEach(cat => {
     cat.addEventListener('click', function () {
 
-        window.location.href = 'index.php'
+        this.parentElement.submit()
 
         //     let data = {
         //         "newFavorite": cat.dataset.catID,

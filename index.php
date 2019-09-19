@@ -4,6 +4,8 @@ require_once __DIR__ . '/vendor/autoload.php';
 $db = new TopCat\Utilities\DB();
 $dbConnection = $db->dbConnect();
 
+var_dump($_POST);
+
 // Prepare target strings
 $dropdownBreeds = '';
 $catshtml = '';
@@ -24,7 +26,15 @@ if (isset($_GET['breed'])) {
     $catHydrator = new TopCat\Hydrators\CatHydrator($dbConnection);
     $cats = $catHydrator->createCatEntitiesArray((int)$_GET['breed']);
     foreach ($cats as $cat) {
-        $catshtml .= '<div class="cat-image"><div data-breedID="' . $cat->getBreed() . '" data-catID="' . $cat->getID() . '" class="favorite-icon-container"><img class="favorite-icon" src="images/fav-icon-empty.svg" alt=""></div><img src="' . $cat->getImage() . '" alt="A cat"></div>';
+        $catshtml .= '<div class="cat-image">
+        <div class="favorite-icon-container">
+        <form action="index.php" method="post">
+        <input name="breedID" value="' . $cat->getBreed() . '">
+        <input name="newFavourite" value="' . $cat->getID() . '">
+        <img class="favorite-icon" src="images/fav-icon-empty.svg" alt="">
+        </div>
+        <img src="' . $cat->getImage() . '" alt="A cat">
+        </div>';
     }
 }
 
@@ -41,6 +51,8 @@ if (isset($_POST['newFavourite']) && isset($_POST['breedID'])) {
 } else {
     $favouriteResponseMessage = 'Favourite POST not set';
 }
+
+echo $favouriteResponseMessage;
 
 ?>
 <!DOCTYPE html>
