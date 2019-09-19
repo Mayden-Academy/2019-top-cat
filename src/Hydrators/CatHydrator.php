@@ -19,12 +19,12 @@ class CatHydrator
      * 
      * @return array - Returns an array of Cat objects based on details acquired from database
      */
-    public function createCatEntitiesArray(int $breedID): array
+    public function createCatEntitiesArray(\PDO $db, int $breedID): array
     {
-        $sqlCommand = 'SELECT `id`, `img_src` AS `image`, `breed_id` AS `breed` FROM `img` WHERE `breed_id` = ' . $breedID;
+        $sqlCommand = 'SELECT `id`, `img_src` AS `image`, `breed_id` AS `breed` FROM `img` WHERE `breed_id` =:breedID';
         $sqlStatement = $this->db->prepare($sqlCommand);
+        $sqlStatement->bindParam('breedID', $breedID, \PDO::PARAM_INT);
         $sqlStatement->execute();
-
         $cats = $sqlStatement->fetchAll(\PDO::FETCH_CLASS, "TopCat\Entities\CatEntity");
         return $cats;
     }
