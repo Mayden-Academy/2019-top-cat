@@ -82,8 +82,7 @@ function fillCatBreedToDB(PDO $db, array $catBreeds)
 {
     foreach($catBreeds as $id => $breed) {
         $sql = $db->prepare('INSERT INTO `breed` (breed) VALUES (:breedToString);');
-        $breedToString = "$breed";
-        $sql->bindParam('breedToString', $breedToString, PDO::PARAM_STR);
+        $sql->bindParam('breedToString', $breed, PDO::PARAM_STR);
         $sql->execute();
     }
     echo "Cat breeds added to database.\n";
