@@ -46,6 +46,8 @@ if (isset($_GET['breed'])) {
     }
 }
 
+$favouriteResponseDisplay = '';
+
 //Checks if a POST is set for newFavourite and breedID.
 //Then updates row in Database setting the breed row to have that newFavourite ID.
 if (isset($_POST['newFavourite']) && isset($_POST['breedID'])) {
@@ -56,6 +58,7 @@ if (isset($_POST['newFavourite']) && isset($_POST['breedID'])) {
     $favouriteSql->bindParam('breedID', $_POST['breedID'], PDO::PARAM_INT);
     $favouriteSql->execute();
     $favouriteResponseMessage = 'Cat successfully favourited';
+    $favouriteResponseDisplay .= '<div class="favorite-response-message">' . $favouriteResponseMessage . '</div>';
 } else {
     $favouriteResponseMessage = 'Favourite POST not set';
 }
@@ -89,6 +92,7 @@ if (isset($_POST['newFavourite']) && isset($_POST['breedID'])) {
     </div>
 </div>
 <div class="container">
+    <?php echo $favouriteResponseDisplay; ?>
     <div class="cat-pictures">
         <?php echo $catshtml; ?>
     </div>

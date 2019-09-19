@@ -122,6 +122,10 @@ form label {
   height: 100px;
 }
 
+.favorite-response-message {
+  color: #000000;
+}
+
 @media screen and (max-width: 1200px) {
   .cat-image {
     width: 50%;
