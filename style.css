@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Lobster%7CManjari&display=swap');
 
-*, *::before, *::after {
+* {
   box-sizing: border-box;
 }
 
@@ -17,11 +17,6 @@ body {
   color: #ffffff;
 }
 
-div {
-  margin: 0;
-  padding: 0;
-}
-
 h1, h2, h3, h4 ,h5 {
   text-align: center;
   font-family: 'Lobster', serif;
@@ -35,8 +30,7 @@ h1 {
 
 .container {
   margin: 0 auto;
-  padding: 30px 0 50px 0;
-  width: 80%;
+  padding: 30px 30px 50px 30px;
 }
 
 .header {
@@ -58,8 +52,7 @@ form label {
   font-size: 2.2rem;
 }
 
-.selector select {
-  margin: 0 auto;
+#select-breed {
   height: 30px;
   width: 250px;
   background: #ffe1ec;
@@ -69,7 +62,7 @@ form label {
   border-radius: 10px;
 }
 
-.sub-btn {
+.submit-button {
   margin-top: 15px;
   background-color: #761f46;
   font-size: 2rem;
@@ -83,6 +76,7 @@ form label {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  padding-bottom: 100px;
 }
 
 .cat-image {
@@ -101,13 +95,13 @@ form label {
   height: 100%;
 }
 
-.favorite-icon-container {
+.favourite-icon-container {
   position: absolute;
   top: 3rem;
   right: 3.5rem;
 }
 
-.favorite-icon-container .favorite-icon {
+.favourite-icon-container .favourite-icon {
   width: 50px;
   height: 45px;
   border-radius: 0;
@@ -118,11 +112,7 @@ form label {
   display: none;
 }
 
-.footer {
-  height: 100px;
-}
-
-.favorite-response-message {
+.favourite-response-message {
   color: #000000;
 }
 

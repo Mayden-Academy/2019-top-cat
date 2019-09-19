@@ -1,4 +1,4 @@
-let target = document.querySelectorAll('.favorite-icon')
+let target = document.querySelectorAll('.favourite-icon')
 
 target.forEach(cat => {
     cat.addEventListener('click', function () {
