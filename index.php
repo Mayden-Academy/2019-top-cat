@@ -22,7 +22,7 @@ if (isset($_GET['breed'])) {
     $catHydrator = new TopCat\Hydrators\CatHydrator($dbConnection);
     $cats = $catHydrator->createCatEntitiesArray((int)$_GET['breed']);
     foreach ($cats as $cat) {
-        $catshtml .= '<div class="cat-image"><img src="' . $cat->getImage() . '" alt="A cat"></div>';
+        $catshtml .= '<div class="cat-image"><img src="' . $cat->getImage() . '" alt="' . $breeds[$cat->getBreed()-1]['breed']  . '"></div>';
     }
 }
 
