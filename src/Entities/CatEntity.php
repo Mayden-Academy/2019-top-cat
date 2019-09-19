@@ -4,18 +4,18 @@ namespace TopCat\Entities;
 
 class CatEntity
 {
-    private $ID;
+    private $id;
     private $image;
     private $breed;
 
     public function __construct(int $id = 0, string $image = '', int $breed = 0) {
-        $this->ID = $id;
+        $this->id = $id;
         $this->image = $image;
         $this->breed = $breed;
     }
 
     public function getID() {
-        return $this->ID;
+        return $this->id;
     }
 
     public function getImage() {

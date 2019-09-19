@@ -29,7 +29,7 @@ class CatHydrator
      * @return array Returns a list of all of the cat breeds.
      */
     public function getBreeds(): array {
-        $sqlStatement = $this->db->prepare('SELECT `breed` FROM `breed`;');
+        $sqlStatement = $this->db->prepare('SELECT `breed`, `favourite_id` FROM `breed`;');
         $sqlStatement->execute();
         return $sqlStatement->fetchAll();
     }

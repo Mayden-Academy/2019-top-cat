@@ -20,9 +20,45 @@ $catsHtml = '';
 if (isset($_GET['breed'])) {
     $cats = $catHydrator->createCatEntitiesArray((int)$_GET['breed']);
     foreach ($cats as $cat) {
-        $catsHtml .= '<div class="cat-image"><img src="' . $cat->getImage() . '" alt="' . $breeds[$cat->getBreed() - 1]['breed'] . '"></div>';
+        $catsHtml .= '<div class="cat-image">
+        <div class="favourite-icon-container">
+        <form action="index.php" method="post">
+        <input class="cat-id-input" name="breedID" value="' . $cat->getBreed() . '">
+        <input class="cat-id-input" name="newFavourite" value="' . $cat->getID() . '">
+        <img class="favourite-icon" src="';
+
+        $breedWanted = $_GET['breed'] - 1;
+
+        if($cat->getID() == $breeds[$breedWanted]['favourite_id']) {
+            $catsHtml .= 'images/fav-icon-full.svg';
+            } else { $catsHtml .= 'images/fav-icon-empty.svg';
+        }
+
+        $catsHtml .=  '" alt="">
+        </form>
+        </div>
+        <img src="' . $cat->getImage() . '" alt="'. $breeds[$cat->getBreed() - 1]['breed'] .'">
+        </div>';
     }
 }
+
+$favouriteResponseDisplay = '';
+
+//Checks if a POST is set for newFavourite and breedID.
+//Then updates row in Database setting the breed row to have that newFavourite ID.
+if (isset($_POST['newFavourite']) && isset($_POST['breedID'])) {
+    $favouriteSql = $dbConnection->prepare('UPDATE `breed` SET favourite_id = :newFavourite WHERE id= :breedID;');
+    //newFavourite is the ID of the image of the favourite cat.
+    $favouriteSql->bindParam('newFavourite', $_POST['newFavourite'], PDO::PARAM_INT);
+    //breedID is the ID of the breed of cat.
+    $favouriteSql->bindParam('breedID', $_POST['breedID'], PDO::PARAM_INT);
+    $favouriteSql->execute();
+    $favouriteResponseMessage = 'Cat successfully favourited';
+    $favouriteResponseDisplay .= '<div class="favourite-response-message">' . $favouriteResponseMessage . '</div>';
+} else {
+    $favouriteResponseMessage = 'Favourite POST not set';
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -32,6 +68,7 @@ if (isset($_GET['breed'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Top Cat</title>
     <link rel="stylesheet" href="style.css">
+    <script defer src="js/script.js"></script>
 </head>
 <body>
 <div class="header">
@@ -49,6 +86,7 @@ if (isset($_GET['breed'])) {
     </div>
 </div>
 <div class="container cat-pictures">
+    <?php echo $favouriteResponseDisplay; ?>
     <?php echo $catsHtml; ?>
 </div>
 </body>

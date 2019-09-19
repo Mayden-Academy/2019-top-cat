@@ -84,6 +84,7 @@ form label {
   padding: 20px;
   width: 30%;
   height: 30vw;
+  position: relative;
 }
 
 .cat-image img {
@@ -92,6 +93,27 @@ form label {
   border-radius: 30px;
   width: 100%;
   height: 100%;
+}
+
+.favourite-icon-container {
+  position: absolute;
+  top: 3rem;
+  right: 3.5rem;
+}
+
+.favourite-icon-container .favourite-icon {
+  width: 50px;
+  height: 45px;
+  border-radius: 0;
+  cursor: pointer;
+}
+
+.cat-id-input {
+  display: none;
+}
+
+.favourite-response-message {
+  color: #000000;
 }
 
 @media screen and (max-width: 1200px) {
