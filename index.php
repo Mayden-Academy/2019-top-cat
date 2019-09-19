@@ -4,8 +4,6 @@ require_once __DIR__ . '/vendor/autoload.php';
 $db = new TopCat\Utilities\DB();
 $dbConnection = $db->dbConnect();
 
-var_dump($_POST);
-
 // Prepare target strings
 $dropdownBreeds = '';
 $catshtml = '';
@@ -51,8 +49,6 @@ if (isset($_POST['newFavourite']) && isset($_POST['breedID'])) {
 } else {
     $favouriteResponseMessage = 'Favourite POST not set';
 }
-
-echo $favouriteResponseMessage;
 
 ?>
 <!DOCTYPE html>
